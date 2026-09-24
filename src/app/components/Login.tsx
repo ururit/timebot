@@ -46,7 +46,7 @@ export function Login() {
             transition={{ delay: 0.1, type: 'spring', stiffness: 200, damping: 15 }}
             className={isDark
               ? "w-16 h-16 rounded-full bg-[#0A84FF]/10 flex items-center justify-center border border-white/[0.06]"
-              : "w-16 h-16 rounded-full bg-[#007AFF]/08 flex items-center justify-center border border-black/[0.06]"
+              : "w-16 h-16 rounded-full bg-[#007AFF]/08 flex items-center justify-center border-2 border-[#dacdcd]"
             }
           >
             <KeyRound className={isDark ? "w-8 h-8 text-[#0A84FF]" : "w-8 h-8 text-[#007AFF]"} />
