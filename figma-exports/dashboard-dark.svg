@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 840" width="390" height="840">
+  <defs>
+    <linearGradient id="navBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0C0C0E" stop-opacity="0.7"/><stop offset="100%" stop-color="#0C0C0E" stop-opacity="0.6"/></linearGradient>
+    <linearGradient id="navBorder" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity="0.08"/><stop offset="100%" stop-color="#fff" stop-opacity="0.04"/></linearGradient>
+    <linearGradient id="panelBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1C1C1E" stop-opacity="0.65"/><stop offset="100%" stop-color="#1C1C1E" stop-opacity="0.6"/></linearGradient>
+    <linearGradient id="panelGlow" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#fff" stop-opacity="0"/><stop offset="30%" stop-color="#fff" stop-opacity="0.35"/><stop offset="70%" stop-color="#fff" stop-opacity="0.08"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    
+    <filter id="panelShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#000" flood-opacity="0.35"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+    <filter id="btnShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="18" flood-color="#30D158" flood-opacity="0.30"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#30D158" flood-opacity="0.12"/>
+    </filter>
+    <filter id="btnShadowRed" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="18" flood-color="#FF453A" flood-opacity="0.18"/>
+    </filter>
+
+    <!-- Dark blobs — неоновые -->
+    <radialGradient id="blob1" cx="30%" cy="20%" r="50%"><stop offset="0%" stop-color="#0A84FF" stop-opacity="0.15"/><stop offset="100%" stop-color="#0A84FF" stop-opacity="0"/></radialGradient>
+    <radialGradient id="blob2" cx="70%" cy="50%" r="45%"><stop offset="0%" stop-color="#5E5CE6" stop-opacity="0.12"/><stop offset="100%" stop-color="#5E5CE6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="blob3" cx="20%" cy="70%" r="40%"><stop offset="0%" stop-color="#30D158" stop-opacity="0.10"/><stop offset="100%" stop-color="#30D158" stop-opacity="0"/></radialGradient>
+    <radialGradient id="blob4" cx="80%" cy="80%" r="50%"><stop offset="0%" stop-color="#FF9F0A" stop-opacity="0.12"/><stop offset="100%" stop-color="#FF9F0A" stop-opacity="0"/></radialGradient>
+    <radialGradient id="blob5" cx="50%" cy="30%" r="35%"><stop offset="0%" stop-color="#BF5AF2" stop-opacity="0.08"/><stop offset="100%" stop-color="#BF5AF2" stop-opacity="0"/></radialGradient>
+
+    <clipPath id="panelClip"><rect x="0" y="0" width="358" height="140" rx="20"/></clipPath>
+    <clipPath id="btnClip"><rect x="0" y="0" width="179" height="100" rx="24"/></clipPath>
+    <clipPath id="historyClip"><rect x="0" y="0" width="358" height="170" rx="20"/></clipPath>
+  </defs>
+
+  <!-- Фон -->
+  <rect width="390" height="840" fill="#0C0C0E"/>
+  <!-- Liquid blobs -->
+  <rect width="390" height="840" fill="url(#blob1)"/>
+  <rect width="390" height="840" fill="url(#blob2)"/>
+  <rect width="390" height="840" fill="url(#blob3)"/>
+  <rect width="390" height="840" fill="url(#blob4)"/>
+  <rect width="390" height="840" fill="url(#blob5)"/>
+
+  <!-- ========== NAV BAR ========== -->
+  <g transform="translate(0, 0)">
+    <rect x="0" y="0" width="390" height="56" fill="url(#navBg)"/>
+    <line x1="0" y1="55.5" x2="390" y2="55.5" stroke="url(#navBorder)" stroke-width="0.5"/>
+    
+    <text x="16" y="34" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" font-weight="590" fill="#98989D" letter-spacing="-0.01em">Главная</text>
+    
+    <!-- Online indicator -->
+    <rect x="80" y="18" width="28" height="20" rx="10" fill="#30D158" fill-opacity="0.10" stroke="#30D158" stroke-opacity="0.2" stroke-width="0.5"/>
+    <text x="88" y="31" font-size="8" fill="#30D158" font-weight="500">✓</text>
+    
+    <!-- User name -->
+    <rect x="240" y="14" width="60" height="28" rx="10" fill="#fff" fill-opacity="0.04" stroke="#fff" stroke-opacity="0.06" stroke-width="0.5"/>
+    <text x="250" y="32" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" fill="#F2F2F7" font-weight="500">Ваня</text>
+    
+    <!-- Logout -->
+    <rect x="304" y="14" width="32" height="28" rx="10" fill="#1C1C1E" fill-opacity="0.5" stroke="#fff" stroke-opacity="0.06" stroke-width="0.5"/>
+    <text x="316" y="31" font-size="10" fill="#FF453A" text-anchor="middle">↪</text>
+    
+    <!-- Theme toggle -->
+    <rect x="340" y="14" width="32" height="28" rx="10" fill="#1C1C1E" fill-opacity="0.5" stroke="#fff" stroke-opacity="0.06" stroke-width="0.5"/>
+    <text x="356" y="31" font-size="12" fill="#FF9F0A" text-anchor="middle">🌙</text>
+  </g>
+
+  <!-- ========== TIMER PANEL ========== -->
+  <g transform="translate(16, 72)">
+    <rect x="0" y="0" width="358" height="130" rx="20" fill="url(#panelBg)" stroke="#fff" stroke-opacity="0.1" stroke-width="0.5" filter="url(#panelShadow)"/>
+    <rect x="0" y="0" width="358" height="130" rx="20" fill="url(#panelGlow)" clip-path="url(#panelClip)"/>
+    
+    <text x="132" y="32" font-size="16" fill="#0A84FF">🕐</text>
+    <text x="152" y="32" font-size="12" font-weight="600" fill="#F2F2F7" font-family="-apple-system, BlinkMacSystemFont, sans-serif" opacity="0.8">Остаток на сегодня</text>
+    
+    <text x="179" y="78" font-size="42" font-weight="700" fill="#F2F2F7" font-family="'SF Mono','SF Pro Display',monospace" text-anchor="middle" letter-spacing="-0.02em">0:00:00</text>
+    
+    <g transform="translate(270, 8)">
+      <rect x="0" y="0" width="32" height="28" rx="14" fill="#fff" fill-opacity="0.04" stroke="#fff" stroke-opacity="0.06" stroke-width="0.5"/>
+      <text x="16" y="17" font-size="10" fill="#98989D" text-anchor="middle" font-weight="500">↻</text>
+    </g>
+    <g transform="translate(310, 8)">
+      <rect x="0" y="0" width="32" height="28" rx="14" fill="#fff" fill-opacity="0.04" stroke="#fff" stroke-opacity="0.06" stroke-width="0.5"/>
+      <text x="16" y="17" font-size="10" fill="#98989D" text-anchor="middle" font-weight="500">👁</text>
+    </g>
+  </g>
+
+  <!-- ========== BALANCE PANEL ========== -->
+  <g transform="translate(16, 214)">
+    <rect x="0" y="0" width="358" height="120" rx="20" fill="url(#panelBg)" stroke="#fff" stroke-opacity="0.1" stroke-width="0.5" filter="url(#panelShadow)"/>
+    <rect x="0" y="0" width="358" height="120" rx="20" fill="url(#panelGlow)" clip-path="url(#panelClip)"/>
+    
+    <text x="148" y="28" font-size="16" fill="#FF453A">📉</text>
+    <text x="168" y="28" font-size="12" font-weight="600" fill="#F2F2F7" font-family="-apple-system, BlinkMacSystemFont, sans-serif" opacity="0.8">Баланс за месяц</text>
+    
+    <g transform="translate(48, 42)">
+      <rect x="0" y="0" width="36" height="36" rx="18" fill="#FF453A" fill-opacity="0.08" stroke="#FF453A" stroke-opacity="0.2" stroke-width="0.5"/>
+      <text x="18" y="23" font-size="20" font-weight="700" fill="#FF453A" text-anchor="middle">−</text>
+    </g>
+    
+    <text x="179" y="72" font-size="44" font-weight="700" fill="#FF453A" text-anchor="middle" letter-spacing="-0.02em" font-family="'SF Mono','SF Pro Display',monospace">−1ч 15м</text>
+    
+    <g transform="translate(274, 42)">
+      <rect x="0" y="0" width="36" height="36" rx="18" fill="#30D158" fill-opacity="0.08" stroke="#30D158" stroke-opacity="0.2" stroke-width="0.5"/>
+      <text x="18" y="23" font-size="20" font-weight="700" fill="#30D158" text-anchor="middle">+</text>
+    </g>
+  </g>
+
+  <!-- ========== ACTION BUTTONS ========== -->
+  <g transform="translate(16, 346)">
+    <!-- Зеленая кнопка — активна -->
+    <rect x="0" y="0" width="172" height="90" rx="24" fill="#30D158" fill-opacity="0.12" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5" filter="url(#btnShadow)"/>
+    <text x="86" y="48" font-size="18" font-weight="600" fill="#30D158" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Я пришёл</text>
+    <ellipse cx="120" cy="45" rx="80" ry="30" fill="#30D158" fill-opacity="0.06"/>
+    
+    <!-- Красная кнопка — неактивна -->
+    <rect x="186" y="0" width="172" height="90" rx="24" fill="#FF453A" fill-opacity="0.12" stroke="#FF453A" stroke-opacity="0.25" stroke-width="0.5" opacity="0.25"/>
+    <text x="272" y="48" font-size="18" font-weight="600" fill="#FF453A" text-anchor="middle" opacity="0.25" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Я ушёл</text>
+  </g>
+
+  <!-- ========== HISTORY SECTION ========== -->
+  <g transform="translate(16, 448)">
+    <rect x="0" y="0" width="358" height="170" rx="20" fill="url(#panelBg)" stroke="#fff" stroke-opacity="0.1" stroke-width="0.5" filter="url(#panelShadow)"/>
+    <rect x="0" y="0" width="358" height="170" rx="20" fill="url(#panelGlow)" clip-path="url(#historyClip)"/>
+    
+    <text x="16" y="28" font-size="11" fill="#0A84FF">📅</text>
+    <text x="34" y="28" font-size="11" font-weight="600" fill="#F2F2F7" opacity="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif">История отметок</text>
+    
+    <g transform="translate(16, 44)">
+      <text x="0" y="10" font-size="8" fill="#98989D">Пн</text>
+      <text x="28" y="10" font-size="8" fill="#98989D">Вт</text>
+      <text x="56" y="10" font-size="8" fill="#98989D">Ср</text>
+      <text x="84" y="10" font-size="8" fill="#98989D">Чт</text>
+      <text x="112" y="10" font-size="8" fill="#98989D">Пт</text>
+      <text x="140" y="10" font-size="8" fill="#98989D">Сб</text>
+      <text x="168" y="10" font-size="8" fill="#98989D">Вс</text>
+      
+      <rect x="112" y="18" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="140" y="18" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="168" y="18" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="0" y="46" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="28" y="46" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="56" y="46" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="84" y="46" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="112" y="46" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="140" y="46" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="168" y="46" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      
+      <rect x="0" y="74" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="28" y="74" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="56" y="74" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="84" y="74" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="112" y="74" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="140" y="74" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.15" stroke="#30D158" stroke-opacity="0.15" stroke-width="0.5"/>
+      <rect x="168" y="74" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      
+      <rect x="0" y="102" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="28" y="102" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="56" y="102" width="18" height="18" rx="4" fill="#FF9F0A" fill-opacity="0.25" stroke="#FF9F0A" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="84" y="102" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="112" y="102" width="18" height="18" rx="4" fill="#FF453A" fill-opacity="0.25" stroke="#FF453A" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="140" y="102" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="168" y="102" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      
+      <rect x="0" y="130" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="28" y="130" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="56" y="130" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="84" y="130" width="18" height="18" rx="4" fill="#30D158" fill-opacity="0.25" stroke="#30D158" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="112" y="130" width="18" height="18" rx="4" fill="#FF9F0A" fill-opacity="0.25" stroke="#FF9F0A" stroke-opacity="0.25" stroke-width="0.5"/>
+      <rect x="140" y="130" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+      <rect x="168" y="130" width="18" height="18" rx="4" fill="#fff" fill-opacity="0.05" stroke="#fff" stroke-opacity="0.04" stroke-width="0.5"/>
+    </g>
+  </g>
+  
+  <g transform="translate(16, 630)">
+    <rect x="0" y="0" width="358" height="90" rx="20" fill="url(#panelBg)" stroke="#fff" stroke-opacity="0.1" stroke-width="0.5" filter="url(#panelShadow)"/>
+    <rect x="0" y="0" width="358" height="90" rx="20" fill="url(#panelGlow)" clip-path="url(#historyClip)"/>
+    
+    <text x="16" y="24" font-size="11" font-weight="600" fill="#F2F2F7" opacity="0.8" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Статистика за неделю</text>
+    
+    <g transform="translate(16, 36)">
+      <rect x="0" y="16" width="42" height="6" rx="3" fill="#30D158" fill-opacity="0.4"/>
+      <rect x="0" y="0" width="36" height="6" rx="3" fill="#30D158" fill-opacity="0.3"/>
+      <text x="0" y="24" font-size="6" fill="#98989D">Пн</text>
+      <rect x="48" y="16" width="18" height="6" rx="3" fill="#30D158" fill-opacity="0.4"/>
+      <text x="48" y="24" font-size="6" fill="#98989D">Вт</text>
+      <rect x="94" y="0" width="42" height="6" rx="3" fill="#30D158" fill-opacity="0.4"/>
+      <text x="94" y="24" font-size="6" fill="#98989D">Ср</text>
+      <rect x="140" y="8" width="36" height="6" rx="3" fill="#30D158" fill-opacity="0.4"/>
+      <text x="140" y="24" font-size="6" fill="#98989D">Чт</text>
+      <rect x="186" y="0" width="42" height="6" rx="3" fill="#30D158" fill-opacity="0.4"/>
+      <text x="186" y="24" font-size="6" fill="#98989D">Пт</text>
+    </g>
+  </g>
+</svg>
