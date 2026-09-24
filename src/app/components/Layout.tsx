@@ -91,10 +91,10 @@ export function Layout() {
   }
 
   const navBtnBase = cn(
-    "p-1.5 sm:p-2 rounded-xl transition-all duration-300 border flex-shrink-0 backdrop-blur-[3px] backdrop-saturate-[1.3]",
+    "p-1.5 sm:p-2 rounded-xl transition-all duration-300 border flex-shrink-0 backdrop-blur-[12px] backdrop-saturate-[1.4]",
     isDark
-      ? "bg-[#1C1C1E]/50 hover:bg-[#2C2C2E]/80 border-white/[0.06]"
-      : "bg-white/50 hover:bg-white/80 border-black/[0.06] shadow-sm"
+      ? "bg-white/[0.06] hover:bg-white/[0.12] border-white/[0.1]"
+      : "bg-white/[0.55] hover:bg-white/[0.8] border-white/[0.65] shadow-sm"
   );
 
   return (
@@ -109,13 +109,15 @@ export function Layout() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "sticky top-0 z-50 pt-[env(safe-area-inset-top)] backdrop-blur-[12px] backdrop-saturate-[1.4] border-b transition-all duration-300 app-nav",
-          isDark
-            ? "bg-[#0C0C0E]/60 border-white/[0.06]"
-            : "bg-white/[0.68] border-black/[0.06]",
+          "sticky top-0 z-50 px-3 pt-[calc(env(safe-area-inset-top)+0.65rem)] transition-all duration-300 app-nav",
         )}
       >
-        <div className="container mx-auto px-1 sm:px-4 max-w-4xl min-h-[3.5rem] py-2 flex items-center justify-between gap-1 sm:gap-2">
+        <div className={cn(
+          "container mx-auto px-1 sm:px-4 max-w-4xl min-h-[3.5rem] py-2 flex items-center justify-between gap-1 sm:gap-2 rounded-[22px] border backdrop-blur-[24px] backdrop-saturate-[1.8] shadow-[0_12px_36px_rgba(0,0,0,0.16),inset_0_0.5px_0_rgba(255,255,255,0.16)]",
+          isDark
+            ? "bg-[rgba(18,18,22,0.72)] border-white/[0.1]"
+            : "bg-[rgba(255,255,255,0.58)] border-white/[0.72]"
+        )}>
           <div className="flex items-center gap-1 sm:gap-6">
             <motion.h1
               initial={{ opacity: 0, x: -10 }}
@@ -128,7 +130,10 @@ export function Layout() {
             >
               Учет времени
             </motion.h1>
-            <div className="flex gap-1 sm:gap-2 p-1">
+            <div className={cn(
+              "flex gap-1 sm:gap-2 p-1 rounded-2xl border backdrop-blur-[12px] backdrop-saturate-[1.5]",
+              isDark ? "bg-black/[0.18] border-white/[0.06]" : "bg-white/[0.32] border-white/[0.55]"
+            )}>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
