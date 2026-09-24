@@ -35,9 +35,10 @@ export function Login() {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className={isDark
-          ? "lg-panel w-full max-w-sm p-8 rounded-[24px]"
-          : "lg-panel w-full max-w-sm p-8 rounded-[24px]"
+          ? "lg-panel w-full max-w-sm p-8 rounded-[24px] flex flex-col justify-center items-center opacity-100"
+          : "lg-panel w-full max-w-sm p-8 rounded-[24px] flex flex-col justify-center items-center opacity-100"
         }
+        style={{ borderWidth: "1px", boxShadow: "0 0 45px 0 rgba(205, 205, 205, 1)" }}
       >
         <div className="flex flex-col items-center gap-6">
           <motion.div
