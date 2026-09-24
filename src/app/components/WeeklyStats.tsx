@@ -123,7 +123,7 @@ export function WeeklyStats() {
     "lg-panel p-6 sm:p-8 rounded-[24px] transition-all duration-300",
     isDark
       ? 'bg-[rgba(28,28,30,0.72)] border-white/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.06)]'
-      : 'bg-[rgba(255,255,255,0.48)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5)]'
+      : 'bg-[rgba(235,235,235,0)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5)]'
   );
 
   const navBtn = cn(
@@ -173,6 +173,7 @@ export function WeeklyStats() {
             const entry = state.currentUser ? state.data[state.currentUser.id]?.entries[dateStr] : null;
             const dayType = getWorkDayType(day);
             const isToday = isSameDay(day, new Date());
+            const isFriday = day.getDay() === 5;
             const totalSeconds = calculateTotalWorkTime(entry?.arrival || null, entry?.departure || null);
 
             const isHoliday = dayType === 'holiday';
@@ -193,13 +194,15 @@ export function WeeklyStats() {
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
                 className={cn(
                   "lg-panel p-4 sm:p-5 rounded-[20px] transition-all duration-300 flex flex-col",
-                  isToday
-                    ? isDark
+                  isDark
+                    ? isToday
                       ? "bg-[#0A84FF]/[0.06] border-[#0A84FF]/20 ring-[0.5px] ring-[#0A84FF]/25"
-                      : "bg-[#007AFF]/[0.05] border-[#007AFF]/20 ring-[0.5px] ring-[#007AFF]/20"
-                    : isDark
-                      ? "bg-white/[0.03] border-white/[0.04]"
-                      : "bg-black/[0.02] border-black/[0.04]"
+                      : "bg-white/[0.03] border-white/[0.04]"
+                    : cn(
+                      isFriday ? "bg-[rgba(165,200,219,1)]" : "bg-white",
+                      "border-black/[0.04] shadow-[0_0_48px_0_rgba(0,0,0,0.18)]",
+                      isToday && "border-[#007AFF]/20 ring-[0.5px] ring-[#007AFF]/20"
+                    )
                 )}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -254,7 +257,11 @@ export function WeeklyStats() {
         </div>
       </div>
 
-      <div className={cn(glassPanelClass, "grid grid-cols-1 md:grid-cols-2 gap-6")}>
+      <div className={cn(
+        glassPanelClass,
+        "grid grid-cols-1 md:grid-cols-2 gap-6",
+        !isDark && "bg-[rgba(236,236,236,0)] text-[rgba(235,235,235,1)]"
+      )}>
         <div className="flex items-center gap-4">
           <div className={cn(
             "w-12 h-12 rounded-[16px] flex items-center justify-center border",
@@ -283,7 +290,9 @@ export function WeeklyStats() {
             <div className="flex items-center md:justify-end gap-3">
               <span className={cn(
                 "text-3xl font-bold tabular-nums tracking-tight transition-colors",
-                (weeklyTotalSeconds - weeklyTotalStandardSeconds) >= 0 ? "text-[#34C759]" : "text-[#FF3B30]"
+                (weeklyTotalSeconds - weeklyTotalStandardSeconds) >= 0
+                  ? "text-[#34C759]"
+                  : isDark ? "text-[#FF3B30]" : "text-white"
               )}>
                 {formatOvertime(weeklyTotalSeconds, weeklyTotalStandardSeconds)}
               </span>

@@ -192,7 +192,7 @@ export function Dashboard() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center relative p-8')}
+              className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center relative p-8', !isDark && 'bg-[rgba(217,217,217,0)]')}
             >
               <SpecularHighlight isDark={isDark} />
 
@@ -254,7 +254,7 @@ export function Dashboard() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
-          className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center p-8')}
+          className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center p-8', !isDark && 'bg-[rgba(217,217,217,0)]')}
         >
           <SpecularHighlight isDark={isDark} />
 
@@ -360,12 +360,13 @@ export function Dashboard() {
                       'radial-gradient(circle at 30% 50%, rgba(48,209,88,0.08) 0%, transparent 60%)',
                     ]
                   : [
-                      'radial-gradient(circle at 30% 50%, rgba(52,199,89,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 70% 50%, rgba(52,199,89,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 30% 50%, rgba(52,199,89,0.08) 0%, transparent 60%)',
+                      'radial-gradient(circle at 30% 50%, rgba(42,194,87,0.78) 0%, transparent 60%)',
+                      'radial-gradient(circle at 70% 50%, rgba(42,194,87,0.78) 0%, transparent 60%)',
+                      'radial-gradient(circle at 30% 50%, rgba(42,194,87,0.78) 0%, transparent 60%)',
                     ],
               }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ boxShadow: '0 0 10px 0 rgba(200, 200, 200, 1)' }}
             />
           )}
           <span className="relative z-[1]">Я пришёл</span>
@@ -392,7 +393,7 @@ export function Dashboard() {
             'py-10 md:py-14 lg-panel rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-all duration-300 active:scale-[0.97]',
             isDark
               ? 'bg-[#FF453A]/12 border-[#FF453A]/25 text-[#FF453A] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
-              : 'bg-[#FF3B30]/12 border-[#FF3B30]/25 text-[#FF3B30] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
+              : 'bg-[rgba(246,5,5,0.2)] border-[#FF3B30]/25 text-[#FF3B30] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
             todayEntry?.arrival && !todayEntry?.departure ? btnGlow(isDark ? '255,69,58' : '255,59,48') : ''
           )}
         >
@@ -424,7 +425,7 @@ export function Dashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
-        className={cn(glassPanelClass, 'p-6 text-left')}
+        className={cn(glassPanelClass, 'p-6 text-left', !isDark && 'bg-[rgba(235,235,235,0)] text-[rgba(214,214,214,1)]')}
       >
         <SpecularHighlight isDark={isDark} />
         <div className="flex items-center gap-2 mb-5 ml-1 relative z-[3]">
