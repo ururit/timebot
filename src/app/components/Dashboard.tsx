@@ -138,7 +138,7 @@ export function Dashboard() {
     'lg-panel rounded-[20px] transition-all duration-500',
     isDark
       ? 'bg-[rgba(28,28,30,0.6)] border-white/[0.1] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.12),inset_0_-1px_2px_rgba(0,0,0,0.1)]'
-      : 'bg-[rgba(255,255,255,0.48)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(0,0,0,0.04)]'
+      : 'bg-[rgba(217,217,217,0.48)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(0,0,0,0.04)]'
   );
 
   // Одинаковая «левитация» для обеих кнопок (одна формула тени).
