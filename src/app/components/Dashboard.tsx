@@ -360,9 +360,9 @@ export function Dashboard() {
                       'radial-gradient(circle at 30% 50%, rgba(48,209,88,0.08) 0%, transparent 60%)',
                     ]
                   : [
-                      'radial-gradient(circle at 30% 50%, rgba(42,194,87,0.78) 0%, transparent 60%)',
-                      'radial-gradient(circle at 70% 50%, rgba(42,194,87,0.78) 0%, transparent 60%)',
-                      'radial-gradient(circle at 30% 50%, rgba(42,194,87,0.78) 0%, transparent 60%)',
+                      'radial-gradient(circle at 30% 50%, rgba(42,194,87,0.3) 0%, transparent 60%)',
+                      'radial-gradient(circle at 70% 50%, rgba(42,194,87,0.3) 0%, transparent 60%)',
+                      'radial-gradient(circle at 30% 50%, rgba(42,194,87,0.3) 0%, transparent 60%)',
                     ],
               }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
