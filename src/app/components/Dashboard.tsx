@@ -7,7 +7,7 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { CalendarGrid } from './CalendarGrid';
 import { WeeklyStats } from './WeeklyStats';
-import { getDailyNormConfig } from '../utils/holidays';
+import { getDailyNormConfig, getWorkDayType } from '../utils/holidays';
 
 function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
@@ -107,8 +107,14 @@ export function Dashboard() {
         const arrival = new Date(todayEntry.arrival!);
         const diff = _now.getTime() - arrival.getTime();
 
-        const standardSeconds = getDailyNormConfig(_now, strictMode) * 60;
-        const targetMs = standardSeconds * 1000;
+        const tomorrow = new Date(_now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const standardMinutes = getWorkDayType(tomorrow) === 'holiday'
+          ? 480
+          : _now.getDay() === 5
+            ? strictMode ? 480 : 540
+            : getDailyNormConfig(_now, strictMode);
+        const targetMs = standardMinutes * 60 * 1000;
         const remaining = targetMs - diff;
 
         if (remaining > 0) {
@@ -127,7 +133,7 @@ export function Dashboard() {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [todayEntry?.arrival, todayEntry?.departure]);
+  }, [todayEntry?.arrival, todayEntry?.departure, strictMode]);
 
   const currentMonthBalance = getMonthlyBalance(now.getFullYear(), now.getMonth());
   const balanceHours = Math.floor(Math.abs(currentMonthBalance) / 60);
