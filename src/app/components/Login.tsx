@@ -57,7 +57,7 @@ export function Login() {
             <h1 className={isDark ? "text-2xl font-semibold text-[#F2F2F7] tracking-tight" : "text-2xl font-semibold text-[#1C1C1E] tracking-tight"}>
               Вход по ключу
             </h1>
-            <p className={isDark ? "text-sm text-[#98989D] mt-2" : "text-sm text-[#8E8E93] mt-2"}>
+            <p className={isDark ? "text-sm text-[#98989D] mt-2" : "text-sm text-[#6E6E73] mt-2"}>
               Придумайте любой ключ для регистрации и входа
             </p>
           </div>
@@ -70,7 +70,7 @@ export function Login() {
               placeholder="Секретный ключ..."
               className={isDark
                 ? "w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/[0.06] focus:outline-none focus:ring-[0.5px] focus:ring-[#0A84FF]/40 text-[#F2F2F7] placeholder:text-[#98989D] backdrop-blur-[3px] transition-all"
-                : "w-full px-4 py-3 rounded-2xl bg-black/[0.03] border border-black/[0.06] focus:outline-none focus:ring-[0.5px] focus:ring-[#007AFF]/40 text-[#1C1C1E] placeholder:text-[#8E8E93] backdrop-blur-[3px] transition-all"
+                : "w-full px-4 py-3 rounded-2xl bg-black/[0.03] border border-black/[0.06] focus:outline-none focus:ring-[0.5px] focus:ring-[#007AFF]/40 text-[#1C1C1E] placeholder:text-[#6E6E73] backdrop-blur-[3px] transition-all"
               }
               required
             />

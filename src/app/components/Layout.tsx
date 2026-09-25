@@ -77,7 +77,7 @@ export function Layout() {
           </div>
           <span className={cn(
             "text-sm font-medium",
-            isDark ? "text-[#98989D]" : "text-[#8E8E93]"
+            isDark ? "text-[#98989D]" : "text-[#6E6E73]"
           )}>
             Загружаем...
           </span>
@@ -145,7 +145,7 @@ export function Layout() {
                         : "bg-[#007AFF]/12 text-[#007AFF] shadow-[inset_0_0_0_0.5px_rgba(0,122,255,0.25)]"
                       : isDark
                         ? "text-[#98989D] hover:text-[#F2F2F7] hover:bg-white/[0.04]"
-                        : "text-[#8E8E93] hover:text-[#1C1C1E] hover:bg-black/[0.04]",
+                        : "text-[#6E6E73] hover:text-[#1C1C1E] hover:bg-black/[0.04]",
                   )
                 }
               >
@@ -162,7 +162,7 @@ export function Layout() {
                         : "bg-[#007AFF]/12 text-[#007AFF] shadow-[inset_0_0_0_0.5px_rgba(0,122,255,0.25)]"
                       : isDark
                         ? "text-[#98989D] hover:text-[#F2F2F7] hover:bg-white/[0.04]"
-                        : "text-[#8E8E93] hover:text-[#1C1C1E] hover:bg-black/[0.04]",
+                        : "text-[#6E6E73] hover:text-[#1C1C1E] hover:bg-black/[0.04]",
                   )
                 }
               >
@@ -181,10 +181,10 @@ export function Layout() {
                 isOnline
                   ? isDark
                     ? "bg-[#30D158]/10 border-[#30D158]/20 text-[#30D158]"
-                    : "bg-[#34C759]/12 border-[#34C759]/20 text-[#34C759]"
+                    : "bg-[#34C759]/12 border-[#34C759]/20 text-[#248A3D]"
                   : isDark
                     ? "bg-[#FF9F0A]/10 border-[#FF9F0A]/20 text-[#FF9F0A]"
-                    : "bg-[#FF9500]/12 border-[#FF9500]/20 text-[#FF9500]"
+                    : "bg-[#FF9500]/12 border-[#B45309]/20 text-[#B45309]"
               )}
             >
               {isOnline
@@ -203,10 +203,10 @@ export function Layout() {
                 strictMode
                   ? isDark
                     ? "text-[#30D158] bg-[#30D158]/10"
-                    : "text-[#34C759] bg-[#34C759]/10"
+                    : "text-[#248A3D] bg-[#34C759]/10"
                   : isDark
                     ? "text-[#98989D] opacity-40"
-                    : "text-[#8E8E93] opacity-40"
+                    : "text-[#6E6E73] opacity-75"
               )}
             >
               <Clock className="w-3 h-3" />
@@ -240,6 +240,8 @@ export function Layout() {
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsDark(!isDark)}
               className={navBtnBase}
+              aria-label={isDark ? "Переключить на светлую тему" : "Переключить на тёмную тему"}
+              title={isDark ? "Светлая тема" : "Тёмная тема"}
             >
               {isDark ? (
                 <Sun className="w-3 h-3 sm:w-4 sm:h-4 text-[#FF9F0A]" />

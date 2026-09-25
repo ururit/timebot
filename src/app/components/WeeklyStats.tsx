@@ -50,7 +50,7 @@ function EditablePill({ label, value, onSave, isDark }: EditablePillProps) {
         }
       }}
     >
-      <span className={cn("font-medium text-[12px]", isDark ? "text-[#98989D]" : "text-[#8E8E93]")}>{label}</span>
+      <span className={cn("font-medium text-[12px]", isDark ? "text-[#98989D]" : "text-[#6E6E73]")}>{label}</span>
       {isEditing ? (
         <input
           autoFocus
@@ -123,7 +123,7 @@ export function WeeklyStats() {
     "lg-panel p-6 sm:p-8 rounded-[24px] transition-all duration-300",
     isDark
       ? 'bg-[rgba(28,28,30,0.72)] border-white/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.06)]'
-      : 'bg-[rgba(235,235,235,0)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5)]'
+      : 'bg-[rgba(255,255,255,0.62)] border-white/[0.62] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_0.5px_0_rgba(255,255,255,0.72)]'
   );
 
   const navBtn = cn(
@@ -199,7 +199,7 @@ export function WeeklyStats() {
                       ? "bg-[#0A84FF]/[0.06] border-[#0A84FF]/20 ring-[0.5px] ring-[#0A84FF]/25"
                       : "bg-white/[0.03] border-white/[0.04]"
                     : cn(
-                      isFriday ? "bg-[rgba(165,200,219,1)]" : "bg-white",
+                      isFriday ? "bg-[#EAF3FA]" : "bg-white",
                       "border-black/[0.04] shadow-[0_0_48px_0_rgba(0,0,0,0.18)]",
                       isToday && "border-[#007AFF]/20 ring-[0.5px] ring-[#007AFF]/20"
                     )
@@ -208,11 +208,11 @@ export function WeeklyStats() {
                 <div className="flex items-center justify-between mb-3">
                   <span className={cn(
                     "font-semibold text-base",
-                    isHoliday ? "text-[#FF453A]" : isDark ? "text-[#F2F2F7]" : "text-[#1C1C1E]"
+                    isHoliday ? (isDark ? "text-[#FF453A]" : "text-[#D70015]") : isDark ? "text-[#F2F2F7]" : "text-[#1C1C1E]"
                   )}>
                     {format(day, 'cccccc', { locale: ru })}
                   </span>
-                  <span className={cn("text-sm font-medium", isDark ? "text-[#98989D]" : "text-[#8E8E93]")}>
+                  <span className={cn("text-sm font-medium", isDark ? "text-[#98989D]" : "text-[#6E6E73]")}>
                     {format(day, 'dd')}
                   </span>
                 </div>
@@ -235,12 +235,12 @@ export function WeeklyStats() {
                 <hr className={cn("my-3 border-t", isDark ? "border-white/[0.05]" : "border-black/[0.05]")} />
 
                 <div className="flex items-center justify-between mt-auto">
-                  <span className={cn("text-[13px]", isDark ? "text-[#98989D]" : "text-[#8E8E93]")}>
+                  <span className={cn("text-[13px]", isDark ? "text-[#98989D]" : "text-[#6E6E73]")}>
                     Итог:
                   </span>
                   <span className={cn(
                     "font-semibold text-[14px]",
-                    isHoliday && totalSeconds === 0 ? (isDark ? "text-[#98989D]" : "text-[#8E8E93]") : diff > 0 ? "text-[#34C759]" : diff < 0 ? "text-[#FF3B30]" : ""
+                    isHoliday && totalSeconds === 0 ? (isDark ? "text-[#98989D]" : "text-[#6E6E73]") : diff > 0 ? (isDark ? "text-[#34C759]" : "text-[#248A3D]") : diff < 0 ? "text-[#FF3B30]" : ""
                   )}>
                     {isHoliday && totalSeconds === 0 ? (
                       "Выходной"
@@ -259,8 +259,7 @@ export function WeeklyStats() {
 
       <div className={cn(
         glassPanelClass,
-        "grid grid-cols-1 md:grid-cols-2 gap-6",
-        !isDark && "bg-[rgba(236,236,236,0)] text-[rgba(235,235,235,1)]"
+        "grid grid-cols-1 md:grid-cols-2 gap-6"
       )}>
         <div className="flex items-center gap-4">
           <div className={cn(
@@ -270,7 +269,7 @@ export function WeeklyStats() {
             <CalendarDays className={cn("w-6 h-6", isDark ? "text-[#0A84FF]" : "text-[#007AFF]")} />
           </div>
           <div>
-            <span className={cn("block text-xs font-medium mb-0.5 uppercase tracking-wider", isDark ? "text-[#98989D]" : "text-[#8E8E93]")}>
+            <span className={cn("block text-xs font-medium mb-0.5 uppercase tracking-wider", isDark ? "text-[#98989D]" : "text-[#6E6E73]")}>
               Отработано
             </span>
             <span className={cn("text-3xl font-bold tabular-nums tracking-tight", isDark ? "text-[#F2F2F7]" : "text-[#1C1C1E]")}>
@@ -284,20 +283,20 @@ export function WeeklyStats() {
           isDark ? "border-white/[0.06]" : "border-black/[0.06]"
         )}>
           <div className="text-left md:text-right">
-            <span className={cn("block text-xs font-medium mb-0.5 uppercase tracking-wider", isDark ? "text-[#98989D]" : "text-[#8E8E93]")}>
+            <span className={cn("block text-xs font-medium mb-0.5 uppercase tracking-wider", isDark ? "text-[#98989D]" : "text-[#6E6E73]")}>
               {weeklyTotalSeconds >= weeklyTotalStandardSeconds ? "Переработка" : "Недоработка"}
             </span>
             <div className="flex items-center md:justify-end gap-3">
               <span className={cn(
                 "text-3xl font-bold tabular-nums tracking-tight transition-colors border border-transparent",
                 (weeklyTotalSeconds - weeklyTotalStandardSeconds) >= 0
-                  ? "text-[#34C759]"
+                  ? isDark ? "text-[#34C759]" : "text-[#248A3D]"
                   : isDark ? "text-[#FF3B30]" : "text-[rgba(204,0,0,1)]"
               )}>
                 {formatOvertime(weeklyTotalSeconds, weeklyTotalStandardSeconds)}
               </span>
               {(weeklyTotalSeconds - weeklyTotalStandardSeconds) > 0 ? (
-                <div className="px-2 py-0.5 rounded-md bg-[#34C759]/15 text-[#34C759] text-xs font-bold uppercase">
+                <div className={cn("px-2 py-0.5 rounded-md text-xs font-bold uppercase", isDark ? "bg-[#34C759]/15 text-[#34C759]" : "bg-[#248A3D]/15 text-[#248A3D]")}>
                   OK
                 </div>
               ) : (weeklyTotalSeconds - weeklyTotalStandardSeconds) < 0 && (

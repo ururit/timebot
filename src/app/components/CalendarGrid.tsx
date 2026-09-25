@@ -89,7 +89,7 @@ export function CalendarGrid() {
       if (delta > 0) {
         colorClass = isDark
           ? 'bg-[#30D158]/25 text-[#30D158] font-bold backdrop-blur-[3px] border border-[#30D158]/25'
-          : 'bg-[#34C759]/25 text-[#34C759] font-bold backdrop-blur-[3px] border border-[#34C759]/25';
+          : 'bg-[#248A3D]/15 text-[#248A3D] font-bold backdrop-blur-[3px] border border-[#248A3D]/20';
         tooltipText = `Переработка: +${Math.floor(delta / 60)}ч ${Math.round(delta % 60)}м`;
       } else if (delta < 0) {
         colorClass = isDark
@@ -139,7 +139,7 @@ export function CalendarGrid() {
           </h3>
           <span className={cn(
             "text-sm font-medium",
-            monthBalance > 0 ? "text-[#34C759]" : monthBalance < 0 ? "text-[#FF3B30]" : isDark ? "text-[#98989D]" : "text-[#8E8E93]"
+            monthBalance > 0 ? "text-[#34C759]" : monthBalance < 0 ? "text-[#FF3B30]" : isDark ? "text-[#98989D]" : "text-[#6E6E73]"
           )}>
             Итог: {balanceText}
           </span>
@@ -158,7 +158,7 @@ export function CalendarGrid() {
         {WEEKDAYS.map(wd => (
           <div key={wd} className={cn(
             "text-center text-[11px] uppercase tracking-wider font-medium py-1.5",
-            isDark ? "text-[#98989D]" : "text-[#8E8E93]"
+            isDark ? "text-[#98989D]" : "text-[#6E6E73]"
           )}>
             {wd}
           </div>
@@ -217,7 +217,7 @@ export function CalendarGrid() {
                     <div className="flex flex-col gap-1">
                       <div className={cn(
                         "px-2 py-1 text-[11px] uppercase tracking-wider font-medium mb-1",
-                        isDark ? "text-[#98989D]" : "text-[#8E8E93]"
+                        isDark ? "text-[#98989D]" : "text-[#6E6E73]"
                       )}>
                         Статус на {day} {MONTHS[month].toLowerCase()}
                       </div>
@@ -248,11 +248,11 @@ export function CalendarGrid() {
         </div>
       </Tooltip.Provider>
 
-      <div className="mt-6 flex flex-wrap gap-4 text-xs sm:text-sm font-medium justify-center">
-        <div className="flex items-center gap-2 opacity-60"><div className="w-2.5 h-2.5 rounded-full bg-[#34C759]" /> Переработка</div>
-        <div className="flex items-center gap-2 opacity-60"><div className="w-2.5 h-2.5 rounded-full bg-[#FF3B30]" /> Недоработка</div>
-        <div className="flex items-center gap-2 opacity-60"><div className="w-2.5 h-2.5 rounded-full bg-[#FF9500]" /> Отпуск</div>
-        <div className="flex items-center gap-2 opacity-60"><div className="w-2.5 h-2.5 rounded-full bg-white border border-black/[0.12]" /> Больничный</div>
+      <div className={cn("mt-6 flex flex-wrap gap-4 text-xs sm:text-sm font-medium justify-center", isDark ? "text-[#98989D]" : "text-[#6E6E73]")}>
+        <div className="flex items-center gap-2"><div className={cn("w-2.5 h-2.5 rounded-full", isDark ? "bg-[#30D158]" : "bg-[#248A3D]")} /> Переработка</div>
+        <div className="flex items-center gap-2"><div className={cn("w-2.5 h-2.5 rounded-full", isDark ? "bg-[#FF453A]" : "bg-[#D70015]")} /> Недоработка</div>
+        <div className="flex items-center gap-2"><div className="w-2.5 h-2.5 rounded-full bg-[#FF9500]" /> Отпуск</div>
+        <div className="flex items-center gap-2"><div className={cn("w-2.5 h-2.5 rounded-full border", isDark ? "bg-white/20 border-white/20" : "bg-white border-black/[0.12]")} /> Больничный</div>
       </div>
     </div>
   );

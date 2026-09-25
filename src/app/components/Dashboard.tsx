@@ -137,7 +137,7 @@ export function Dashboard() {
     'lg-panel rounded-[20px] transition-all duration-500',
     isDark
       ? 'bg-[rgba(28,28,30,0.6)] border-white/[0.1] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.12),inset_0_-1px_2px_rgba(0,0,0,0.1)]'
-      : 'bg-[rgba(217,217,217,0.48)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(0,0,0,0.04)]'
+      : 'bg-[rgba(255,255,255,0.58)] border-white/[0.62] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_0.5px_0_rgba(255,255,255,0.72),inset_0_-1px_1px_rgba(0,0,0,0.03)]'
   );
 
   // Одинаковая «левитация» для обеих кнопок (одна формула тени).
@@ -149,7 +149,7 @@ export function Dashboard() {
     'lg-chip px-[18px] py-[8px] text-xs font-medium',
     isDark
       ? 'bg-white/[0.04] hover:bg-white/[0.08] border-white/[0.06] text-[#98989D]'
-      : 'bg-black/[0.03] hover:bg-black/[0.06] border-black/[0.06] text-[#8E8E93]'
+      : 'bg-black/[0.03] hover:bg-black/[0.06] border-black/[0.06] text-[#6E6E73]'
   );
 
   return (
@@ -179,8 +179,8 @@ export function Dashboard() {
               whileTap={{ scale: 0.97 }}
             >
               <SpecularHighlight isDark={isDark} />
-              <Eye className={cn('w-5 h-5', isDark ? 'text-[#98989D]' : 'text-[#8E8E93]')} />
-              <span className={cn('text-sm font-medium', isDark ? 'text-[#98989D]' : 'text-[#8E8E93]')}>
+              <Eye className={cn('w-5 h-5', isDark ? 'text-[#98989D]' : 'text-[#6E6E73]')} />
+              <span className={cn('text-sm font-medium', isDark ? 'text-[#98989D]' : 'text-[#6E6E73]')}>
                 Показать таймер
               </span>
             </motion.button>
@@ -191,7 +191,7 @@ export function Dashboard() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center relative p-8', !isDark && 'bg-[rgba(217,217,217,0)]')}
+              className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center relative p-8')}
             >
               <SpecularHighlight isDark={isDark} />
 
@@ -253,7 +253,7 @@ export function Dashboard() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
-          className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center p-8', !isDark && 'bg-[rgba(217,217,217,0)]')}
+          className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center p-8')}
         >
           <SpecularHighlight isDark={isDark} />
 
@@ -267,8 +267,8 @@ export function Dashboard() {
               transition={{ duration: 0.3 }}
             >
               {currentMonthBalance >= 0
-                ? <TrendingUp className="w-5 h-5 text-[#34C759]" />
-                : <TrendingDown className="w-5 h-5 text-[#FF3B30]" />}
+                ? <TrendingUp className={cn('w-5 h-5', isDark ? 'text-[#34C759]' : 'text-[#248A3D]')} />
+                : <TrendingDown className={cn('w-5 h-5', isDark ? 'text-[#FF3B30]' : 'text-[#D70015]')} />}
             </motion.div>
             <h2 className="text-base font-semibold opacity-80">Баланс за месяц</h2>
           </div>
@@ -281,7 +281,7 @@ export function Dashboard() {
                 'lg-chip w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 flex items-center justify-center font-bold text-xl sm:text-2xl',
                 isDark
                   ? 'bg-white/[0.04] hover:bg-[#FF453A]/10 border-white/[0.06] text-[#FF453A]'
-                  : 'bg-black/[0.03] hover:bg-[#FF3B30]/08 border-black/[0.06] text-[#FF3B30]'
+                  : 'bg-black/[0.03] hover:bg-[#FF3B30]/08 border-black/[0.06] text-[#D70015]'
               )}
               title="Убавить 5 минут"
             >
@@ -295,9 +295,9 @@ export function Dashboard() {
               className={cn(
                 'font-bold tabular-nums tracking-tight px-1 text-3xl sm:text-[48px] whitespace-nowrap',
                 currentMonthBalance > 0
-                  ? 'text-[#34C759]'
+                  ? isDark ? 'text-[#34C759]' : 'text-[#248A3D]'
                   : currentMonthBalance < 0
-                    ? 'text-[#FF3B30]'
+                    ? isDark ? 'text-[#FF3B30]' : 'text-[#D70015]'
                     : ''
               )}
             >
@@ -311,7 +311,7 @@ export function Dashboard() {
                 'lg-chip w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0 flex items-center justify-center font-bold text-xl sm:text-2xl',
                 isDark
                   ? 'bg-white/[0.04] hover:bg-[#30D158]/10 border-white/[0.06] text-[#30D158]'
-                  : 'bg-black/[0.03] hover:bg-[#34C759]/08 border-black/[0.06] text-[#34C759]'
+                  : 'bg-black/[0.03] hover:bg-[#34C759]/08 border-black/[0.06] text-[#248A3D]'
               )}
               title="Добавить 5 минут"
             >
@@ -344,7 +344,7 @@ export function Dashboard() {
             'py-10 md:py-14 lg-panel rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-all duration-300 active:scale-[0.97]',
             isDark
               ? 'bg-[#30D158]/12 border-[#30D158]/25 text-[#30D158] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
-              : 'bg-[#34C759]/12 border-[#34C759]/25 text-[#34C759] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
+              : 'bg-[#34C759]/12 border-[#34C759]/25 text-[#1F7A38] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
             !todayEntry?.arrival ? btnGlow(isDark ? '48,209,88' : '52,199,89') : ''
           )}
         >
@@ -365,7 +365,10 @@ export function Dashboard() {
                     ],
               }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ boxShadow: '0 18px 27px 0 rgba(138, 124, 124, 0.42)', border: '1px solid rgba(0, 0, 0, 0.14)' }}
+              style={{
+                boxShadow: isDark ? '0 18px 27px 0 rgba(138, 124, 124, 0.42)' : '0 18px 27px 0 rgba(70, 70, 80, 0.16)',
+                border: isDark ? '1px solid rgba(0, 0, 0, 0.14)' : '1px solid rgba(255, 255, 255, 0.55)',
+              }}
             />
           )}
           <span className="relative z-[1]">Я пришёл</span>
@@ -392,7 +395,7 @@ export function Dashboard() {
             'py-10 md:py-14 lg-panel rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-all duration-300 active:scale-[0.97]',
             isDark
               ? 'bg-[#FF453A]/12 border-[#FF453A]/25 text-[#FF453A] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
-              : 'bg-[rgba(246,5,5,0.2)] border-[#FF3B30]/25 text-[#FF3B30] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
+              : 'bg-[#FF3B30]/[0.12] border-[#FF3B30]/25 text-[#D70015] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
             todayEntry?.arrival && !todayEntry?.departure ? btnGlow(isDark ? '255,69,58' : '255,59,48') : ''
           )}
         >
@@ -424,7 +427,7 @@ export function Dashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
-        className={cn(glassPanelClass, 'p-6 text-left', !isDark && 'bg-[rgba(235,235,235,0)] text-[rgba(214,214,214,1)]')}
+        className={cn(glassPanelClass, 'p-6 text-left')}
       >
         <SpecularHighlight isDark={isDark} />
         <div className="flex items-center gap-2 mb-5 ml-1 relative z-[3]">

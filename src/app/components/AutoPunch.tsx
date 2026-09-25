@@ -94,7 +94,7 @@ export function AutoPunch() {
           </h2>
           <p className={cn(
             "text-base",
-            isDark ? "text-[#98989D]" : "text-[#8E8E93]"
+            isDark ? "text-[#98989D]" : "text-[#6E6E73]"
           )}>
             {statusMsg}
           </p>
