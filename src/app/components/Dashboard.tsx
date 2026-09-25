@@ -365,7 +365,7 @@ export function Dashboard() {
                     ],
               }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ boxShadow: '0 0 10px 0 rgba(200, 200, 200, 1)' }}
+              style={{ boxShadow: '0 18px 52px 0 rgba(0, 0, 0, 0.42)', border: '1px solid rgba(0, 0, 0, 1)' }}
             />
           )}
           <span className="relative z-[1]">Я пришёл</span>

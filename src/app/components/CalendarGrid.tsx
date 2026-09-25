@@ -105,13 +105,13 @@ export function CalendarGrid() {
     } else if (isHoliday || isWeekend) {
       // Выходной/праздник — красноватая объёмная карточка
       colorClass = isDark
-        ? 'bg-[#FF453A]/[0.1] hover:bg-[#FF453A]/[0.16] text-[#FF453A]/80 border-[#FF453A]/20 shadow-[0_0_10px_0_rgba(200,200,200,1)]'
+        ? 'bg-[#FF453A]/[0.1] hover:bg-[#FF453A]/[0.16] text-[#FF453A]/80 border-[#FF453A]/20 shadow-[1px_1px_19px_0_rgba(2,2,2,0.15)]'
         : 'bg-[#FF3B30]/[0.07] hover:bg-[#FF3B30]/[0.12] text-[#FF3B30]/70 border-[#FF3B30]/20 shadow-[0_0_10px_0_rgba(200,200,200,1)]';
       tooltipText = isHoliday ? 'Праздник' : 'Выходной';
     } else {
       // Обычный день — белая объёмная карточка, выступающая на фоне панели
       colorClass = isDark
-        ? 'bg-white/[0.08] hover:bg-white/[0.12] text-[#F2F2F7] border-white/[0.06] shadow-[0_2px_10px_rgba(0,0,0,0.25)]'
+        ? 'bg-white/[0.08] hover:bg-white/[0.12] text-[#F2F2F7] border-white/[0.06] shadow-[1px_1px_19px_0_rgba(2,2,2,0.15)]'
         : 'bg-white hover:bg-white/90 text-[#1C1C1E] border-black/[0.04] shadow-[0_0_10px_0_rgba(200,200,200,1)]';
     }
 
