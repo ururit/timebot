@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTimeStore } from '@/app/store/TimeStore';
 import { useOutletContext } from 'react-router';
-import { Clock, TrendingUp, TrendingDown, CalendarDays, RotateCcw, EyeOff, Eye, Sparkles } from 'lucide-react';
+import { Clock, TrendingUp, TrendingDown, CalendarDays, RotateCcw, EyeOff, Eye } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { CalendarGrid } from './CalendarGrid';
@@ -133,15 +133,6 @@ export function Dashboard() {
   const balanceHours = Math.floor(Math.abs(currentMonthBalance) / 60);
   const balanceMins = Math.abs(currentMonthBalance) % 60;
   const balanceText = `${currentMonthBalance >= 0 ? '+' : '-'}${balanceHours}ч ${balanceMins}м`;
-  const dailyNormSeconds = getDailyNormConfig(now, strictMode) * 60;
-  const shiftStart = todayEntry?.arrival ? new Date(todayEntry.arrival).getTime() : null;
-  const shiftEnd = todayEntry?.departure ? new Date(todayEntry.departure).getTime() : Date.now();
-  const workedSeconds = shiftStart ? Math.max(0, Math.floor((shiftEnd - shiftStart) / 1000)) : 0;
-  const progressPercent = dailyNormSeconds > 0 ? Math.min(100, Math.round((workedSeconds / dailyNormSeconds) * 100)) : 0;
-  const workedDuration = `${Math.floor(workedSeconds / 3600)}ч ${Math.floor((workedSeconds % 3600) / 60)}м`;
-  const dailyNormDuration = `${Math.floor(dailyNormSeconds / 3600)}ч ${Math.floor((dailyNormSeconds % 3600) / 60)}м`;
-  const progressStatus = todayEntry?.departure ? 'День завершён' : todayEntry?.arrival ? 'Сейчас в работе' : 'Отметь начало дня';
-
   const glassPanelClass = cn(
     'lg-panel rounded-[20px] transition-all duration-500',
     isDark
@@ -427,57 +418,6 @@ export function Dashboard() {
           <span className="relative z-[1]">Я ушёл</span>
         </motion.button>
       </div>
-
-      {/* ────── Daily progress ────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, delay: 0.18 }}
-        className={cn(glassPanelClass, 'relative overflow-hidden p-5 sm:p-6', !isDark && 'bg-[rgba(217,217,217,0)]')}
-      >
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className={cn('absolute -right-8 -top-16 h-44 w-44 rounded-full blur-3xl', isDark ? 'bg-[#0A84FF]/20' : 'bg-[#64D2FF]/30')} />
-          <div className={cn('absolute -bottom-20 left-[28%] h-36 w-48 rounded-full blur-3xl', isDark ? 'bg-[#5E5CE6]/15' : 'bg-[#BF5AF2]/15')} />
-        </div>
-        <SpecularHighlight isDark={isDark} />
-        <div className="relative z-[3] flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
-          <div className="flex min-w-0 items-center gap-3 sm:w-[35%]">
-            <div className={cn(
-              'flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]',
-              isDark ? 'border-white/10 bg-white/[0.08] text-[#64D2FF]' : 'border-white/70 bg-white/45 text-[#007AFF]'
-            )}>
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <div className="min-w-0">
-              <h2 className="text-base font-semibold tracking-tight">Прогресс дня</h2>
-              <div className={cn('mt-1 flex items-center gap-1.5 text-xs', isDark ? 'text-[#98989D]' : 'text-[#6E6E73]')}>
-                <span className={cn('h-1.5 w-1.5 rounded-full', todayEntry?.arrival && !todayEntry?.departure ? 'bg-[#30D158] shadow-[0_0_8px_rgba(48,209,88,0.8)]' : 'bg-[#0A84FF]')} />
-                {progressStatus}
-              </div>
-            </div>
-          </div>
-
-          <div className="min-w-0 flex-1">
-            <div className="mb-2 flex items-center justify-between gap-3 text-xs">
-              <span className={cn('font-medium', isDark ? 'text-white/75' : 'text-[#3A3A3C]')}>Отработано {workedDuration}</span>
-              <span className={isDark ? 'text-[#98989D]' : 'text-[#8E8E93]'}>Норма {dailyNormDuration}</span>
-            </div>
-            <div className={cn('h-2.5 overflow-hidden rounded-full p-[1px] shadow-[inset_0_1px_3px_rgba(0,0,0,0.18)]', isDark ? 'bg-black/30' : 'bg-black/[0.08]')}>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${progressPercent}%` }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="h-full rounded-full bg-gradient-to-r from-[#0A84FF] via-[#5E5CE6] to-[#BF5AF2] shadow-[0_0_12px_rgba(94,92,230,0.55)]"
-              />
-            </div>
-          </div>
-
-          <div className="flex shrink-0 items-baseline gap-1 sm:justify-end sm:w-[12%]">
-            <span className="text-3xl font-bold tabular-nums tracking-tight bg-gradient-to-br from-[#64D2FF] via-[#0A84FF] to-[#BF5AF2] bg-clip-text text-transparent">{progressPercent}</span>
-            <span className={cn('text-sm font-semibold', isDark ? 'text-white/60' : 'text-[#8E8E93]')}>%</span>
-          </div>
-        </div>
-      </motion.div>
 
       {/* ────── History ────── */}
       <motion.div

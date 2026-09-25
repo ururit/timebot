@@ -289,10 +289,10 @@ export function WeeklyStats() {
             </span>
             <div className="flex items-center md:justify-end gap-3">
               <span className={cn(
-                "text-3xl font-bold tabular-nums tracking-tight transition-colors",
+                "text-3xl font-bold tabular-nums tracking-tight transition-colors border border-transparent",
                 (weeklyTotalSeconds - weeklyTotalStandardSeconds) >= 0
                   ? "text-[#34C759]"
-                  : isDark ? "text-[#FF3B30]" : "text-white"
+                  : isDark ? "text-[#FF3B30]" : "text-[rgba(204,0,0,1)]"
               )}>
                 {formatOvertime(weeklyTotalSeconds, weeklyTotalStandardSeconds)}
               </span>
