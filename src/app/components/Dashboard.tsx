@@ -140,10 +140,10 @@ export function Dashboard() {
   const balanceMins = Math.abs(currentMonthBalance) % 60;
   const balanceText = `${currentMonthBalance >= 0 ? '+' : '-'}${balanceHours}ч ${balanceMins}м`;
   const glassPanelClass = cn(
-  'lg-panel rounded-[20px] transition-all duration-500 backdrop-blur-[28px] backdrop-saturate-[1.7]',
+  'lg-panel rounded-[20px] transition-all duration-500 backdrop-blur-[32px] backdrop-saturate-[1.8]',
   isDark
-    ? 'bg-[rgba(28,28,30,0.28)] border-white/[0.18] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.12)]'
-    : 'bg-[rgba(255,255,255,0.14)] border-white/[0.55] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.72)]'
+    ? 'bg-[rgba(28,28,30,0.20)] border-white/[0.18] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.12)]'
+    : 'bg-[rgba(255,255,255,0.08)] border-white/[0.55] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.72)]'
 );
 
   // Одинаковая «левитация» для обеих кнопок (одна формула тени).
