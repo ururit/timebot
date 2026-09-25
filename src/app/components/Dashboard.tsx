@@ -366,8 +366,10 @@ export function Dashboard() {
               }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               style={{
-                boxShadow: isDark ? '0 18px 27px 0 rgba(138, 124, 124, 0.42)' : '0 18px 27px 0 rgba(70, 70, 80, 0.16)',
-                border: isDark ? '1px solid rgba(0, 0, 0, 0.14)' : '1px solid rgba(255, 255, 255, 0.55)',
+                boxShadow: isDark ? '0 18px 27px 0 rgba(25, 25, 25, 0.77)' : '0 18px 27px 0 rgba(70, 70, 80, 0.16)',
+                opacity: 1,
+                border: '1px solid',
+                borderColor: isDark ? 'rgba(8, 141, 35, 0.2)' : 'rgba(255, 255, 255, 0.55)',
               }}
             />
           )}
