@@ -140,11 +140,11 @@ export function Dashboard() {
   const balanceMins = Math.abs(currentMonthBalance) % 60;
   const balanceText = `${currentMonthBalance >= 0 ? '+' : '-'}${balanceHours}ч ${balanceMins}м`;
   const glassPanelClass = cn(
-    'lg-panel rounded-[20px] transition-all duration-500',
-    isDark
-      ? 'bg-[rgba(28,28,30,0.6)] border-white/[0.1] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.12),inset_0_-1px_2px_rgba(0,0,0,0.1)]'
-      : 'bg-[rgba(255,255,255,0.58)] border-white/[0.62] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_0.5px_0_rgba(255,255,255,0.72),inset_0_-1px_1px_rgba(0,0,0,0.03)]'
-  );
+  'lg-panel rounded-[20px] transition-all duration-500 backdrop-blur-[28px] backdrop-saturate-[1.7]',
+  isDark
+    ? 'bg-[rgba(28,28,30,0.28)] border-white/[0.18] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.12)]'
+    : 'bg-[rgba(255,255,255,0.14)] border-white/[0.55] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.72)]'
+);
 
   // Одинаковая «левитация» для обеих кнопок (одна формула тени).
   // При нажатии кнопка уходит вровень с дэшбордом (active:shadow-none + scale).
