@@ -347,7 +347,44 @@ export function Dashboard() {
           onClick={recordArrival}
           disabled={!!todayEntry?.arrival}
           className={cn(
-            'py-10 md:py-14 lg-panel rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-all duration-300 active:scale-[0.97]',
+            '.liquid-glass-btn {
+  position: relative;
+  padding: 14px 28px;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+
+  color: white;
+  font-weight: 600;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.liquid-glass-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+
+  background: rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 12px 40px rgba(0, 0, 0, 0.22);
+}
+
+.liquid-glass-btn:active {
+  transform: scale(0.97);
+}',
             isDark
               ? 'bg-[#30D158]/12 border-[#30D158]/25 text-[#30D158] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
               : 'bg-[#34C759]/12 border-[#34C759]/25 text-[#1F7A38] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
