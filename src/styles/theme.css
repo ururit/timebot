@@ -138,6 +138,7 @@
 
   html {
     font-size: var(--font-size);
+    background-color: var(--background);
   }
 
   /* iOS-style scrollbar */
@@ -207,13 +208,13 @@
     box-shadow:
       0 18px 52px rgba(0, 0, 0, 0.42),
       0 4px 16px rgba(0, 0, 0, 0.2),
-      inset 0 0.5px 0 rgba(255, 255, 255, 0.03),
+      inset 0 0.5px 0 rgba(255, 255, 255, 0.1),
       inset 0 -1px 2px rgba(0, 0, 0, 0.2);
   }
 
   .dark .lg-panel::before {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12) 30%, rgba(255, 255, 255, 0.03) 70%, transparent);
-    opacity: 0.5;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35) 30%, rgba(255, 255, 255, 0.08) 70%, transparent);
+    opacity: 0.7;
   }
 
   .dark .lg-panel::after {

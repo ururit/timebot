@@ -113,10 +113,10 @@ export function Layout() {
         )}
       >
         <div className={cn(
-          "container mx-auto px-1 sm:px-4 max-w-4xl min-h-[3.5rem] py-2 flex items-center justify-between gap-1 sm:gap-2 rounded-[22px] border backdrop-blur-[24px] backdrop-saturate-[1.8]",
+          "container mx-auto px-1 sm:px-4 max-w-4xl min-h-[3.5rem] py-2 flex items-center justify-between gap-1 sm:gap-2 rounded-[22px] border backdrop-blur-[24px] backdrop-saturate-[1.8] shadow-[0_12px_36px_rgba(0,0,0,0.16),inset_0_0.5px_0_rgba(255,255,255,0.16)]",
           isDark
-            ? "bg-[rgba(18,18,22,0.72)] border-white/[0.1] shadow-[0_12px_36px_rgba(0,0,0,0.16),inset_0_0.5px_0_rgba(255,255,255,0.04)]"
-            : "bg-[rgba(255,255,255,0.58)] border-white/[0.72] shadow-[0_12px_36px_rgba(0,0,0,0.16),inset_0_0.5px_0_rgba(255,255,255,0.16)]"
+            ? "bg-[rgba(18,18,22,0.72)] border-white/[0.1]"
+            : "bg-[rgba(255,255,255,0.58)] border-white/[0.72]"
         )}>
           <div className="flex items-center gap-1 sm:gap-6">
             <motion.h1
