@@ -311,8 +311,10 @@ export function Dashboard() {
               style={{
                 boxShadow: isDark ? '0 18px 27px 0 rgba(25, 25, 25, 0.77)' : '0 18px 27px 0 rgba(70, 70, 80, 0.16)',
                 opacity: 1,
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                color: 'rgba(48, 209, 88, 1)',
                 border: '1px solid',
-                borderColor: isDark ? 'rgba(8, 141, 35, 0.2)' : 'rgba(255, 255, 255, 0.55)',
+                borderColor: isDark ? 'rgba(12, 63, 23, 0.2)' : 'rgba(255, 255, 255, 0.55)',
               }}
             />
           )}
@@ -339,7 +341,7 @@ export function Dashboard() {
           className={cn(
             'py-10 md:py-14 lg-panel rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-all duration-300 active:scale-[0.97]',
             isDark
-              ? 'bg-[#FF453A]/12 border-[#FF453A]/25 text-[#FF453A] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
+              ? 'bg-[rgba(182,28,28,0.2)] border-[rgba(83,3,3,0.2)] text-[rgba(228,66,56,1)] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
               : 'bg-[#FF3B30]/[0.12] border-[#FF3B30]/25 text-[#D70015] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
             todayEntry?.arrival && !todayEntry?.departure ? btnGlow(isDark ? '255,69,58' : '255,59,48') : ''
           )}
