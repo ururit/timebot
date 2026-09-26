@@ -44,7 +44,7 @@ export function AutoPunch() {
   };
 
   const glassPanel = isDark
-    ? 'bg-[rgba(28,28,30,0.72)] border-white/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.06)]'
+    ? 'bg-[rgba(28,28,30,0.72)] border-white/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.2)]'
     : 'bg-[rgba(255,255,255,0.48)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5)]';
 
   return (
