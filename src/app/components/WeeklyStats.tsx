@@ -175,11 +175,10 @@ export function WeeklyStats() {
             const entry = state.currentUser ? state.data[state.currentUser.id]?.entries[dateStr] : null;
             const dayType = getWorkDayType(day);
             const isToday = isSameDay(day, new Date());
-            const isFriday = day.getDay() === 5;
+            const isWeekend = day.getDay() === 0 || day.getDay() === 6;
             const totalSeconds = calculateTotalWorkTime(entry?.arrival || null, entry?.departure || null);
 
             const isHoliday = dayType === 'holiday';
-            const isWeekend = dayType === 'weekend';
 
             const standardSeconds = getDailyNormConfig(day) * 60;
 
@@ -201,9 +200,9 @@ export function WeeklyStats() {
                       ? "bg-[#0A84FF]/[0.06] border-[#0A84FF]/20 ring-[0.5px] ring-[#0A84FF]/25"
                       : "bg-white/[0.03] border-white/[0.04]"
                     : cn(
-                      isFriday ? "bg-[#EAF3FA]" : "bg-white",
+                      isToday && !isWeekend ? "bg-[#EAF3FA]" : "bg-white",
                       "border-black/[0.04] shadow-[0_0_48px_0_rgba(0,0,0,0.18)]",
-                      isToday && "border-[#007AFF]/20 ring-[0.5px] ring-[#007AFF]/20"
+                      isToday && !isWeekend && "border-[#007AFF]/20 ring-[0.5px] ring-[#007AFF]/20"
                     )
                 )}
               >
