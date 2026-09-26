@@ -27,7 +27,7 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-[100dvh] flex items-center justify-center p-4 pt-[env(safe-area-inset-top)] relative overflow-hidden">
+    <div className="min-h-[100dvh] flex items-center justify-center p-4 pt-[env(safe-area-inset-top)] relative isolate overflow-hidden">
       <LiquidBackground isDark={isDark} />
 
       <motion.div

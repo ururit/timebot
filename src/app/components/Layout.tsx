@@ -99,7 +99,7 @@ export function Layout() {
 
   return (
     <div className={cn(
-      "min-h-[100dvh] transition-colors duration-500 flex flex-col w-full overflow-x-hidden relative",
+      "min-h-[100dvh] transition-colors duration-500 flex flex-col w-full overflow-x-hidden relative isolate",
       isDark ? "text-[#F2F2F7]" : "text-[#1C1C1E]"
     )}>
       <LiquidBackground isDark={isDark} />
