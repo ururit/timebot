@@ -8,6 +8,7 @@ import { twMerge } from 'tailwind-merge';
 import { format, startOfWeek, endOfWeek, eachDayOfInterval, addWeeks, subWeeks, isSameDay, parseISO, differenceInSeconds } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { getWorkDayType, getDailyNormConfig } from '../utils/holidays';
+import { SpecularHighlight } from './GlassPanel';
 
 function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
@@ -120,10 +121,10 @@ export function WeeklyStats() {
   };
 
   const glassPanelClass = cn(
-    "lg-panel p-6 sm:p-8 rounded-[24px] transition-all duration-300",
+    "lg-panel p-6 sm:p-8 rounded-[20px] transition-all duration-500",
     isDark
-      ? 'bg-[rgba(28,28,30,0.72)] border-white/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.06)]'
-      : 'bg-[rgba(255,255,255,0.62)] border-white/[0.62] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_0.5px_0_rgba(255,255,255,0.72)]'
+      ? 'bg-[rgba(28,28,30,0.6)] border-white/[0.1] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.12),inset_0_-1px_2px_rgba(0,0,0,0.1)]'
+      : 'bg-[rgba(255,255,255,0.58)] border-white/[0.62] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_0.5px_0_rgba(255,255,255,0.72),inset_0_-1px_1px_rgba(0,0,0,0.03)]'
   );
 
   const navBtn = cn(
@@ -138,8 +139,9 @@ export function WeeklyStats() {
 
   return (
     <div className="space-y-4">
-      <div className={glassPanelClass}>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+      <div className={cn(glassPanelClass, "overflow-hidden")}>
+        <SpecularHighlight isDark={isDark} />
+        <div className="relative z-[3] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
             <CalendarDays className={cn("w-5 h-5", isDark ? "text-[#0A84FF]" : "text-[#007AFF]")} />
             <h2 className={cn("text-lg font-semibold tracking-tight", isDark ? "text-[#F2F2F7]" : "text-[#1C1C1E]")}>
@@ -165,7 +167,7 @@ export function WeeklyStats() {
         </div>
 
         <div className={cn(
-          "grid gap-3",
+          "relative z-[3] grid gap-3",
           workDays.length === 6 ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-5"
         )}>
           {workDays.map((day, idx) => {
@@ -257,10 +259,9 @@ export function WeeklyStats() {
         </div>
       </div>
 
-      <div className={cn(
-        glassPanelClass,
-        "grid grid-cols-1 md:grid-cols-2 gap-6"
-      )}>
+      <div className={cn(glassPanelClass, "overflow-hidden")}>
+        <SpecularHighlight isDark={isDark} />
+        <div className="relative z-[3] grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex items-center gap-4">
           <div className={cn(
             "w-12 h-12 rounded-[16px] flex items-center justify-center border",
@@ -306,6 +307,7 @@ export function WeeklyStats() {
               )}
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

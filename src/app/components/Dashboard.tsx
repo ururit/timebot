@@ -7,74 +7,11 @@ import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { CalendarGrid } from './CalendarGrid';
 import { WeeklyStats } from './WeeklyStats';
+import { SpecularHighlight } from './GlassPanel';
 import { getDailyNormConfig, getWorkDayType } from '../utils/holidays';
 
 function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
-}
-
-/**
- * Объёмное стекло — имитация физической толщины панели:
- * - светящаяся кромка сверху/слева (как у настоящего стекла на свету)
- * - плотная направленная тень снизу (панель "лежит" на фоне)
- * - внутренняя подсветка нижней кромки (свет проходит сквозь стекло)
- * - широкий диагональный блик (отражение окна/лампы)
- */
-function SpecularHighlight({ isDark }: { isDark: boolean }) {
-  return (
-    <div className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none z-[2]">
-      {/* Верхняя светящаяся кромка — единый цветокор для обеих тем */}
-      <div
-        className="absolute top-0 left-[8%] right-[25%] h-[2px] rounded-full"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${
-            isDark ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.55)'
-          } 30%, rgba(255,255,255,0.15) 70%, transparent)`,
-          filter: 'blur(0.3px)',
-          opacity: isDark ? 1 : 0.85,
-        }}
-      />
-      {/* Светлая грань слева — приглушена в обеих */}
-      <div
-        className="absolute top-[8%] bottom-[40%] left-0 w-[2px] rounded-full"
-        style={{
-          background: `linear-gradient(180deg, ${
-            isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.15)'
-          }, transparent 70%)`,
-          filter: 'blur(0.2px)',
-        }}
-      />
-      {/* Внутренняя подсветка нижней кромки — приглушена в обеих */}
-      <div
-        className="absolute bottom-0 left-[15%] right-[15%] h-[1px] rounded-full"
-        style={{
-          background: isDark
-            ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.04) 60%, transparent)'
-            : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.05) 60%, transparent)',
-        }}
-      />
-      {/* Внутренний контур — фаска стекла, тише в обеих */}
-      <div
-        className="absolute inset-[1.5px] rounded-[18px]"
-        style={{
-          border: '1px solid',
-          borderColor: isDark
-            ? 'rgba(255,255,255,0.04)'
-            : 'rgba(255,255,255,0.08)',
-        }}
-      />
-      {/* Диагональный блик — убран в обеих темах */}
-      {/* Хроматическое преломление по краям — едва заметное */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: isDark
-            ? 'radial-gradient(ellipse 120% 55% at 70% 90%, rgba(10,132,255,0.03) 0%, transparent 45%), radial-gradient(ellipse 100% 40% at 15% 85%, rgba(255,69,58,0.02) 0%, transparent 40%)'
-            : 'radial-gradient(ellipse 120% 55% at 70% 90%, rgba(10,132,255,0.03) 0%, transparent 45%), radial-gradient(ellipse 100% 40% at 15% 85%, rgba(255,69,58,0.02) 0%, transparent 40%)',
-        }}
-      />
-    </div>
-  );
 }
 
 export function Dashboard() {

@@ -3,6 +3,49 @@ import { type ReactNode } from 'react';
 const cn = (...inputs: (string | undefined | null | false)[]) =>
   inputs.filter(Boolean).join(' ');
 
+export function SpecularHighlight({ isDark }: { isDark: boolean }) {
+  return (
+    <div className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none z-[2]">
+      <div
+        className="absolute top-0 left-[8%] right-[25%] h-[2px] rounded-full"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${isDark ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.55)'} 30%, rgba(255,255,255,0.15) 70%, transparent)`,
+          filter: 'blur(0.3px)',
+          opacity: isDark ? 1 : 0.85,
+        }}
+      />
+      <div
+        className="absolute top-[8%] bottom-[40%] left-0 w-[2px] rounded-full"
+        style={{
+          background: `linear-gradient(180deg, ${isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.15)'}, transparent 70%)`,
+          filter: 'blur(0.2px)',
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-[15%] right-[15%] h-[1px] rounded-full"
+        style={{
+          background: isDark
+            ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.04) 60%, transparent)'
+            : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.05) 60%, transparent)',
+        }}
+      />
+      <div
+        className="absolute inset-[1.5px] rounded-[18px]"
+        style={{
+          border: '1px solid',
+          borderColor: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.08)',
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse 120% 55% at 70% 90%, rgba(10,132,255,0.03) 0%, transparent 45%), radial-gradient(ellipse 100% 40% at 15% 85%, rgba(255,69,58,0.02) 0%, transparent 40%)',
+        }}
+      />
+    </div>
+  );
+}
+
 /**
  * Объёмная стеклянная панель в стиле Liquid Glass.
  *
