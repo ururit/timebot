@@ -9,9 +9,9 @@ export function SpecularHighlight({ isDark }: { isDark: boolean }) {
       <div
         className="absolute top-0 left-[8%] right-[25%] h-[2px] rounded-full"
         style={{
-          background: `linear-gradient(90deg, transparent, ${isDark ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.55)'} 30%, rgba(255,255,255,0.15) 70%, transparent)`,
+          background: `linear-gradient(90deg, transparent, ${isDark ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.55)'} 30%, ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.15)'} 70%, transparent)`,
           filter: 'blur(0.3px)',
-          opacity: isDark ? 1 : 0.85,
+          opacity: isDark ? 0.65 : 0.85,
         }}
       />
       <div
@@ -25,7 +25,7 @@ export function SpecularHighlight({ isDark }: { isDark: boolean }) {
         className="absolute bottom-0 left-[15%] right-[15%] h-[1px] rounded-full"
         style={{
           background: isDark
-            ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.04) 60%, transparent)'
+            ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.015) 40%, rgba(255,255,255,0.01) 60%, transparent)'
             : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.05) 60%, transparent)',
         }}
       />
@@ -33,7 +33,7 @@ export function SpecularHighlight({ isDark }: { isDark: boolean }) {
         className="absolute inset-[1.5px] rounded-[18px]"
         style={{
           border: '1px solid',
-          borderColor: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.08)',
+          borderColor: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(255,255,255,0.08)',
         }}
       />
       <div
