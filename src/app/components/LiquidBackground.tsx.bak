@@ -1,0 +1,65 @@
+const cn = (...inputs: (string | undefined | null | false)[]) =>
+  inputs.filter(Boolean).join(' ');
+
+/**
+ * Background for the glass surfaces.
+ * Intentionally contains NO blue/cyan ambient light: only warm, rose, sage and neutral light.
+ * The layer sits above the page background and below all app content so the blobs are actually visible.
+ */
+export function LiquidBackground({ isDark }: { isDark: boolean }) {
+  const blobs = isDark
+    ? [
+        { x: 8, y: 18, size: 410, color: 'rgba(246, 158, 104, 0.24)', blur: 14, duration: 15 },
+        { x: 88, y: 26, size: 380, color: 'rgba(178, 113, 132, 0.18)', blur: 16, duration: 18 },
+        { x: 72, y: 82, size: 470, color: 'rgba(210, 162, 102, 0.18)', blur: 18, duration: 21 },
+        { x: 22, y: 78, size: 350, color: 'rgba(116, 143, 112, 0.15)', blur: 13, duration: 17 },
+        { x: 50, y: 48, size: 290, color: 'rgba(255, 236, 211, 0.09)', blur: 11, duration: 14 },
+      ]
+    : [
+        { x: 8, y: 18, size: 420, color: 'rgba(242, 170, 126, 0.36)', blur: 14, duration: 15 },
+        { x: 88, y: 26, size: 380, color: 'rgba(211, 143, 158, 0.28)', blur: 16, duration: 18 },
+        { x: 72, y: 82, size: 490, color: 'rgba(234, 190, 126, 0.27)', blur: 18, duration: 21 },
+        { x: 22, y: 78, size: 360, color: 'rgba(157, 188, 155, 0.23)', blur: 13, duration: 17 },
+        { x: 50, y: 48, size: 290, color: 'rgba(255, 255, 255, 0.40)', blur: 11, duration: 14 },
+      ];
+
+  return (
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div
+        className={cn(
+          'absolute inset-0 transition-colors duration-700',
+          isDark ? 'bg-[#09090A]' : 'bg-[#F1EFEC]'
+        )}
+      />
+
+      {blobs.map((blob, idx) => (
+        <div
+          key={idx}
+          className="absolute rounded-full ambient-blob"
+          style={{
+            width: blob.size,
+            height: blob.size,
+            left: `${blob.x}%`,
+            top: `${blob.y}%`,
+            background: `radial-gradient(circle at 44% 40%, ${blob.color} 0%, ${blob.color} 42%, transparent 78%)`,
+            filter: `blur(${blob.blur}px)`,
+            transform: 'translate(-50%, -50%)',
+            animationDuration: `${blob.duration}s, ${Math.max(7, blob.duration * 0.58)}s`,
+            animationDelay: `${idx * -2.3}s, ${idx * -1.1}s`,
+            animationDirection: `${idx % 2 === 0 ? 'normal' : 'reverse'}, ${idx % 2 === 0 ? 'reverse' : 'normal'}`,
+          }}
+        />
+      ))}
+
+      {/* Static soft pools keep the composition visible even when animated blobs drift away. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: isDark
+            ? 'radial-gradient(ellipse 55% 38% at 50% 100%, rgba(226,156,102,0.10) 0%, transparent 72%), radial-gradient(ellipse 44% 34% at 100% 55%, rgba(183,118,135,0.075) 0%, transparent 72%)'
+            : 'radial-gradient(ellipse 55% 38% at 50% 100%, rgba(226,156,102,0.18) 0%, transparent 72%), radial-gradient(ellipse 44% 34% at 100% 55%, rgba(183,118,135,0.14) 0%, transparent 72%)',
+        }}
+      />
+    </div>
+  );
+}
