@@ -309,7 +309,6 @@ export function Dashboard() {
               }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               style={{
-                boxShadow: isDark ? '0 18px 27px 0 rgba(25, 25, 25, 0.77)' : '0 18px 27px 0 rgba(70, 70, 80, 0.16)',
                 opacity: 1,
                 backgroundColor: 'rgba(255, 255, 255, 0)',
                 color: 'rgba(48, 209, 88, 1)',
