@@ -1,9 +1,0 @@
-node_modules/
-dist/
-chrome-test-profile*/
-figma-screenshots/
-*.log
-*.pid
-.env
-.env.local
-.env.*.local
