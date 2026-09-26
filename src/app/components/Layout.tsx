@@ -20,6 +20,7 @@ export function Layout() {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem("themePref") === "dark";
   });
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const urlKey = searchParams.get("key");
   const pathMatch = location.pathname.match(/^\/auto-punch\/(.+)$/);
@@ -51,6 +52,13 @@ export function Layout() {
       localStorage.setItem("themePref", "light");
     }
   }, [isDark]);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (!isReady || isAutoLoggingIn) {
     return (
@@ -91,7 +99,7 @@ export function Layout() {
   }
 
   const navBtnBase = cn(
-    "p-1.5 sm:p-2 rounded-xl transition-all duration-300 border flex-shrink-0 backdrop-blur-[3px] backdrop-saturate-[1.3]",
+    "lg-chip p-1.5 sm:p-2 rounded-xl flex-shrink-0",
     isDark
       ? "bg-[#1C1C1E]/50 hover:bg-[#2C2C2E]/80 border-white/[0.06]"
       : "bg-white/50 hover:bg-white/80 border-black/[0.06] shadow-sm"
@@ -99,7 +107,7 @@ export function Layout() {
 
   return (
     <div className={cn(
-      "min-h-[100dvh] transition-colors duration-500 flex flex-col w-full overflow-x-hidden relative",
+      "min-h-[100dvh] transition-colors duration-500 flex flex-col w-full overflow-x-hidden relative isolate",
       isDark ? "text-[#F2F2F7]" : "text-[#1C1C1E]"
     )}>
       <LiquidBackground isDark={isDark} />
@@ -109,10 +117,8 @@ export function Layout() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "sticky top-0 z-50 pt-[env(safe-area-inset-top)] backdrop-blur-[12px] backdrop-saturate-[1.4] border-b transition-all duration-300 app-nav",
-          isDark
-            ? "bg-[#0C0C0E]/60 border-white/[0.06]"
-            : "bg-white/[0.68] border-black/[0.06]",
+          "top-0 z-50 pt-[env(safe-area-inset-top)] transition-shadow duration-300 app-nav",
+          isScrolled && "app-nav--scrolled",
         )}
       >
         <div className="container mx-auto px-1 sm:px-4 max-w-4xl min-h-[3.5rem] py-2 flex items-center justify-between gap-1 sm:gap-2">
@@ -250,7 +256,7 @@ export function Layout() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="container mx-auto px-4 py-8 max-w-4xl flex-1 flex flex-col w-full relative z-[1]"
+        className="container mx-auto px-4 py-8 max-w-4xl flex-1 flex flex-col w-full relative z-10"
       >
         <Outlet context={{ isDark }} />
       </motion.main>

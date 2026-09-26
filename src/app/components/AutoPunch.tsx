@@ -44,8 +44,8 @@ export function AutoPunch() {
   };
 
   const glassPanel = isDark
-    ? 'bg-[rgba(28,28,30,0.72)] border-white/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.06)]'
-    : 'bg-[rgba(255,255,255,0.48)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5)]';
+    ? 'bg-[rgba(20,22,28,0.42)] border-white/[0.12]'
+    : 'bg-[rgba(255,255,255,0.20)] border-white/[0.48]';
 
   return (
     <motion.div
@@ -53,9 +53,10 @@ export function AutoPunch() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "lg-panel max-w-md mx-auto p-8 rounded-[24px]",
+        "lg-panel lg-lift max-w-md mx-auto p-8 rounded-[24px]",
         glassPanel
       )}
+      whileHover={{ y: -4, scale: 1.008 }}
     >
       <div className="flex flex-col items-center text-center gap-6">
         <motion.div
@@ -107,7 +108,7 @@ export function AutoPunch() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               className={cn(
-                "lg-panel w-full space-y-4 p-6 rounded-[20px] overflow-hidden",
+                "lg-panel lg-lift w-full space-y-4 p-6 rounded-[20px] overflow-hidden",
                 isDark ? "bg-white/[0.03] border-white/[0.06]" : "bg-black/[0.02] border-black/[0.06]"
               )}
             >
@@ -126,7 +127,7 @@ export function AutoPunch() {
                   whileTap={{ scale: 0.97 }}
                   onClick={() => setShowResetConfirm(false)}
                   className={cn(
-                    "flex-1 py-3 rounded-2xl font-medium transition-all backdrop-blur-[3px] border",
+                    "flex-1 py-3 rounded-2xl font-medium transition-all backdrop-blur-[2px] border",
                     isDark
                       ? "bg-white/[0.04] hover:bg-white/[0.08] border-white/[0.06] text-[#F2F2F7]"
                       : "bg-black/[0.03] hover:bg-black/[0.06] border-black/[0.06] text-[#1C1C1E]"

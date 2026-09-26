@@ -38,10 +38,10 @@ function EditablePill({ label, value, onSave, isDark }: EditablePillProps) {
   return (
     <div
       className={cn(
-        "flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-all border backdrop-blur-[3px]",
+        "flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-all border",
         isDark
-          ? "bg-white/[0.04] border-white/[0.04] hover:bg-white/[0.07]"
-          : "bg-black/[0.02] border-black/[0.04] hover:bg-black/[0.04]"
+          ? "bg-white/[0.035] border-white/[0.055] hover:bg-white/[0.055]"
+          : "bg-white/[0.10] border-white/[0.24] hover:bg-white/[0.16]"
       )}
       onClick={() => {
         if (!isEditing) {
@@ -120,10 +120,10 @@ export function WeeklyStats() {
   };
 
   const glassPanelClass = cn(
-    "lg-panel p-6 sm:p-8 rounded-[24px] transition-all duration-300",
+    "lg-panel lg-lift p-6 sm:p-8 rounded-[24px]",
     isDark
-      ? 'bg-[rgba(28,28,30,0.72)] border-white/[0.06] shadow-[0_2px_24px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.06)]'
-      : 'bg-[rgba(255,255,255,0.48)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5)]'
+      ? 'bg-[rgba(27,26,26,0.34)] border-white/[0.16]'
+      : 'bg-[rgba(255,255,255,0.18)] border-white/[0.42]'
   );
 
   const navBtn = cn(
@@ -191,15 +191,17 @@ export function WeeklyStats() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
+                whileHover={{ y: -4, scale: 1.015 }}
+                whileTap={{ scale: 0.99 }}
                 className={cn(
-                  "lg-panel p-4 sm:p-5 rounded-[20px] transition-all duration-300 flex flex-col",
+                  "lg-panel lg-lift p-4 sm:p-5 rounded-[20px] flex flex-col",
                   isToday
                     ? isDark
                       ? "bg-[#0A84FF]/[0.06] border-[#0A84FF]/20 ring-[0.5px] ring-[#0A84FF]/25"
                       : "bg-[#007AFF]/[0.05] border-[#007AFF]/20 ring-[0.5px] ring-[#007AFF]/20"
                     : isDark
-                      ? "bg-white/[0.03] border-white/[0.04]"
-                      : "bg-black/[0.02] border-black/[0.04]"
+                      ? "bg-white/[0.035] border-white/[0.09]"
+                      : "bg-white/[0.16] border-white/[0.36]"
                 )}
               >
                 <div className="flex items-center justify-between mb-3">

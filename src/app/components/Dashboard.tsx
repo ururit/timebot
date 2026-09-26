@@ -13,70 +13,6 @@ function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
 }
 
-/**
- * Объёмное стекло — имитация физической толщины панели:
- * - светящаяся кромка сверху/слева (как у настоящего стекла на свету)
- * - плотная направленная тень снизу (панель "лежит" на фоне)
- * - внутренняя подсветка нижней кромки (свет проходит сквозь стекло)
- * - широкий диагональный блик (отражение окна/лампы)
- */
-function SpecularHighlight({ isDark }: { isDark: boolean }) {
-  return (
-    <div className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none z-[2]">
-      {/* Верхняя светящаяся кромка — единый цветокор для обеих тем */}
-      <div
-        className="absolute top-0 left-[8%] right-[25%] h-[2px] rounded-full"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${
-            isDark ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.55)'
-          } 30%, rgba(255,255,255,0.15) 70%, transparent)`,
-          filter: 'blur(0.3px)',
-          opacity: isDark ? 1 : 0.85,
-        }}
-      />
-      {/* Светлая грань слева — приглушена в обеих */}
-      <div
-        className="absolute top-[8%] bottom-[40%] left-0 w-[2px] rounded-full"
-        style={{
-          background: `linear-gradient(180deg, ${
-            isDark ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.15)'
-          }, transparent 70%)`,
-          filter: 'blur(0.2px)',
-        }}
-      />
-      {/* Внутренняя подсветка нижней кромки — приглушена в обеих */}
-      <div
-        className="absolute bottom-0 left-[15%] right-[15%] h-[1px] rounded-full"
-        style={{
-          background: isDark
-            ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.04) 60%, transparent)'
-            : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.05) 60%, transparent)',
-        }}
-      />
-      {/* Внутренний контур — фаска стекла, тише в обеих */}
-      <div
-        className="absolute inset-[1.5px] rounded-[18px]"
-        style={{
-          border: '1px solid',
-          borderColor: isDark
-            ? 'rgba(255,255,255,0.04)'
-            : 'rgba(255,255,255,0.08)',
-        }}
-      />
-      {/* Диагональный блик — убран в обеих темах */}
-      {/* Хроматическое преломление по краям — едва заметное */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: isDark
-            ? 'radial-gradient(ellipse 120% 55% at 70% 90%, rgba(10,132,255,0.03) 0%, transparent 45%), radial-gradient(ellipse 100% 40% at 15% 85%, rgba(255,69,58,0.02) 0%, transparent 40%)'
-            : 'radial-gradient(ellipse 120% 55% at 70% 90%, rgba(10,132,255,0.03) 0%, transparent 45%), radial-gradient(ellipse 100% 40% at 15% 85%, rgba(255,69,58,0.02) 0%, transparent 40%)',
-        }}
-      />
-    </div>
-  );
-}
-
 export function Dashboard() {
   const { isDark } = useOutletContext<{ isDark: boolean }>();
   const { state, recordArrival, recordDeparture, resetToday, getMonthlyBalance, adjustMonthlyBalance, strictMode } = useTimeStore();
@@ -135,16 +71,11 @@ export function Dashboard() {
   const balanceText = `${currentMonthBalance >= 0 ? '+' : '-'}${balanceHours}ч ${balanceMins}м`;
 
   const glassPanelClass = cn(
-    'lg-panel rounded-[20px] transition-all duration-500',
+    'lg-panel lg-lift rounded-[20px]',
     isDark
-      ? 'bg-[rgba(28,28,30,0.6)] border-white/[0.1] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2),inset_0_0.5px_0_rgba(255,255,255,0.12),inset_0_-1px_2px_rgba(0,0,0,0.1)]'
-      : 'bg-[rgba(255,255,255,0.48)] border-white/[0.4] shadow-[0_14px_44px_rgba(0,0,0,0.25),0_4px_12px_rgba(0,0,0,0.12),inset_0_0.5px_0_rgba(255,255,255,0.5),inset_0_-1px_1px_rgba(0,0,0,0.04)]'
+      ? 'bg-[rgba(27,26,26,0.34)] border-white/[0.16]'
+      : 'bg-[rgba(255,255,255,0.18)] border-white/[0.42]'
   );
-
-  // Одинаковая «левитация» для обеих кнопок (одна формула тени).
-  // При нажатии кнопка уходит вровень с дэшбордом (active:shadow-none + scale).
-  const btnGlow = (rgb: string) =>
-    `shadow-[0_10px_36px_rgba(${rgb},0.4),0_3px_10px_rgba(${rgb},0.2),inset_0_0.5px_0_rgba(255,255,255,0.5),inset_0_1px_0_rgba(255,255,255,0.25)] active:shadow-none`;
 
   const smallBtnClass = cn(
     'lg-chip px-[18px] py-[8px] text-xs font-medium',
@@ -177,9 +108,9 @@ export function Dashboard() {
                 glassPanelClass,
                 'flex flex-col items-center justify-center text-center gap-2 cursor-pointer hover:opacity-80 active:scale-[0.97] py-6'
               )}
+              whileHover={{ y: -3, scale: 1.006 }}
               whileTap={{ scale: 0.97 }}
             >
-              <SpecularHighlight isDark={isDark} />
               <Eye className={cn('w-5 h-5', isDark ? 'text-[#98989D]' : 'text-[#8E8E93]')} />
               <span className={cn('text-sm font-medium', isDark ? 'text-[#98989D]' : 'text-[#8E8E93]')}>
                 Показать таймер
@@ -193,8 +124,8 @@ export function Dashboard() {
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center relative p-8')}
+              whileHover={{ y: -3, scale: 1.006 }}
             >
-              <SpecularHighlight isDark={isDark} />
 
               <div className="absolute top-4 right-4 flex items-center gap-2 z-[3]">
                 {todayEntry?.arrival && (
@@ -255,8 +186,8 @@ export function Dashboard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
           className={cn(glassPanelClass, 'flex flex-col items-center justify-center text-center p-8')}
+          whileHover={{ y: -3, scale: 1.006 }}
         >
-          <SpecularHighlight isDark={isDark} />
 
           <div className="flex items-center gap-2 mb-2 z-[3]">
             <motion.div
@@ -332,6 +263,7 @@ export function Dashboard() {
             !todayEntry?.arrival
               ? {
                   scale: 1.02,
+                  y: -4,
                   backgroundColor: isDark
                     ? 'rgba(48,209,88,0.15)'
                     : 'rgba(52,199,89,0.12)',
@@ -342,32 +274,12 @@ export function Dashboard() {
           onClick={recordArrival}
           disabled={!!todayEntry?.arrival}
           className={cn(
-            'py-10 md:py-14 lg-panel rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-all duration-300 active:scale-[0.97]',
+            'py-10 md:py-14 lg-panel lg-lift rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-[transform,background-color,box-shadow] duration-300 active:scale-[0.97]',
             isDark
-              ? 'bg-[#30D158]/12 border-[#30D158]/25 text-[#30D158] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
-              : 'bg-[#34C759]/12 border-[#34C759]/25 text-[#34C759] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
-            !todayEntry?.arrival ? btnGlow(isDark ? '48,209,88' : '52,199,89') : ''
+              ? 'bg-[#30D158]/[0.07] border-[#30D158]/20 text-[#30D158] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
+              : 'bg-[#34C759]/[0.07] border-[#34C759]/20 text-[#34C759] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
           )}
         >
-          {!todayEntry?.arrival && (
-            <motion.div
-              className="absolute inset-0 rounded-[24px]"
-              animate={{
-                background: isDark
-                  ? [
-                      'radial-gradient(circle at 30% 50%, rgba(48,209,88,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 70% 50%, rgba(48,209,88,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 30% 50%, rgba(48,209,88,0.08) 0%, transparent 60%)',
-                    ]
-                  : [
-                      'radial-gradient(circle at 30% 50%, rgba(52,199,89,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 70% 50%, rgba(52,199,89,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 30% 50%, rgba(52,199,89,0.08) 0%, transparent 60%)',
-                    ],
-              }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          )}
           <span className="relative z-[1]">Я пришёл</span>
         </motion.button>
 
@@ -379,6 +291,7 @@ export function Dashboard() {
             todayEntry?.arrival && !todayEntry?.departure
               ? {
                   scale: 1.02,
+                  y: -4,
                   backgroundColor: isDark
                     ? 'rgba(255,69,58,0.15)'
                     : 'rgba(255,59,48,0.12)',
@@ -389,32 +302,12 @@ export function Dashboard() {
           onClick={recordDeparture}
           disabled={!todayEntry?.arrival || !!todayEntry?.departure}
           className={cn(
-            'py-10 md:py-14 lg-panel rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-all duration-300 active:scale-[0.97]',
+            'py-10 md:py-14 lg-panel lg-lift rounded-[24px] font-semibold text-xl sm:text-2xl md:text-3xl transition-[transform,background-color,box-shadow] duration-300 active:scale-[0.97]',
             isDark
-              ? 'bg-[#FF453A]/12 border-[#FF453A]/25 text-[#FF453A] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
-              : 'bg-[#FF3B30]/12 border-[#FF3B30]/25 text-[#FF3B30] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100',
-            todayEntry?.arrival && !todayEntry?.departure ? btnGlow(isDark ? '255,69,58' : '255,59,48') : ''
+              ? 'bg-[#FF453A]/[0.07] border-[#FF453A]/20 text-[#FF453A] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
+              : 'bg-[#FF3B30]/[0.07] border-[#FF3B30]/20 text-[#FF3B30] disabled:opacity-25 disabled:shadow-none disabled:active:scale-100'
           )}
         >
-          {todayEntry?.arrival && !todayEntry?.departure && (
-            <motion.div
-              className="absolute inset-0 rounded-[24px]"
-              animate={{
-                background: isDark
-                  ? [
-                      'radial-gradient(circle at 30% 50%, rgba(255,69,58,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 70% 50%, rgba(255,69,58,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 30% 50%, rgba(255,69,58,0.08) 0%, transparent 60%)',
-                    ]
-                  : [
-                      'radial-gradient(circle at 30% 50%, rgba(255,59,48,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 70% 50%, rgba(255,59,48,0.08) 0%, transparent 60%)',
-                      'radial-gradient(circle at 30% 50%, rgba(255,59,48,0.08) 0%, transparent 60%)',
-                    ],
-              }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          )}
           <span className="relative z-[1]">Я ушёл</span>
         </motion.button>
       </div>
@@ -425,8 +318,8 @@ export function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
         className={cn(glassPanelClass, 'p-6 text-left')}
+        whileHover={{ y: -3, scale: 1.004 }}
       >
-        <SpecularHighlight isDark={isDark} />
         <div className="flex items-center gap-2 mb-5 ml-1 relative z-[3]">
           <CalendarDays className={cn('w-5 h-5', isDark ? 'text-[#0A84FF]' : 'text-[#007AFF]')} />
           <h2 className="text-base font-semibold">История отметок</h2>

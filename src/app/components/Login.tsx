@@ -27,7 +27,7 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-[100dvh] flex items-center justify-center p-4 pt-[env(safe-area-inset-top)] relative overflow-hidden">
+    <div className="min-h-[100dvh] flex items-center justify-center p-4 pt-[env(safe-area-inset-top)] relative overflow-hidden isolate">
       <LiquidBackground isDark={isDark} />
 
       <motion.div
@@ -35,9 +35,10 @@ export function Login() {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className={isDark
-          ? "lg-panel w-full max-w-sm p-8 rounded-[24px]"
-          : "lg-panel w-full max-w-sm p-8 rounded-[24px]"
+          ? "lg-panel lg-lift relative z-10 w-full max-w-sm p-8 rounded-[24px] bg-[rgba(27,26,26,0.34)] border-white/[0.16]"
+          : "lg-panel lg-lift relative z-10 w-full max-w-sm p-8 rounded-[24px] bg-white/[0.18] border-white/[0.42]"
         }
+        whileHover={{ y: -4, scale: 1.008 }}
       >
         <div className="flex flex-col items-center gap-6">
           <motion.div
@@ -68,12 +69,13 @@ export function Login() {
               onChange={(e) => setKey(e.target.value)}
               placeholder="Секретный ключ..."
               className={isDark
-                ? "w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/[0.06] focus:outline-none focus:ring-[0.5px] focus:ring-[#0A84FF]/40 text-[#F2F2F7] placeholder:text-[#98989D] backdrop-blur-[3px] transition-all"
-                : "w-full px-4 py-3 rounded-2xl bg-black/[0.03] border border-black/[0.06] focus:outline-none focus:ring-[0.5px] focus:ring-[#007AFF]/40 text-[#1C1C1E] placeholder:text-[#8E8E93] backdrop-blur-[3px] transition-all"
+                ? "w-full px-4 py-3 rounded-2xl bg-white/[0.04] border border-white/[0.06] focus:outline-none focus:ring-[0.5px] focus:ring-[#0A84FF]/40 text-[#F2F2F7] placeholder:text-[#98989D] backdrop-blur-[2px] transition-all"
+                : "w-full px-4 py-3 rounded-2xl bg-black/[0.03] border border-black/[0.06] focus:outline-none focus:ring-[0.5px] focus:ring-[#007AFF]/40 text-[#1C1C1E] placeholder:text-[#8E8E93] backdrop-blur-[2px] transition-all"
               }
               required
             />
             <motion.button
+              whileHover={{ y: -2, scale: 1.01 }}
               whileTap={{ scale: 0.97 }}
               type="submit"
               className={isDark

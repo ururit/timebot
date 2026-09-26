@@ -71,13 +71,13 @@ export function CalendarGrid() {
 
     if (entry?.manualStatus === 'sick') {
       colorClass = isDark
-        ? 'bg-[rgba(255,255,255,0.08)] text-[#F2F2F7] font-medium backdrop-blur-[3px] border border-white/[0.06]'
-        : 'bg-[rgba(0,0,0,0.04)] text-[#1C1C1E] font-medium backdrop-blur-[3px] border border-black/[0.06]';
+        ? 'bg-[rgba(255,255,255,0.08)] text-[#F2F2F7] font-medium border border-white/[0.06]'
+        : 'bg-[rgba(0,0,0,0.04)] text-[#1C1C1E] font-medium border border-black/[0.06]';
       tooltipText = 'Больничный';
     } else if (entry?.manualStatus === 'vacation') {
       colorClass = isDark
-        ? 'bg-[#FF9F0A]/25 text-[#FF9F0A] font-bold backdrop-blur-[3px] border border-[#FF9F0A]/25'
-        : 'bg-[#FF9500]/25 text-[#FF9500] font-bold backdrop-blur-[3px] border border-[#FF9500]/25';
+        ? 'bg-[#FF9F0A]/25 text-[#FF9F0A] font-bold border border-[#FF9F0A]/25'
+        : 'bg-[#FF9500]/25 text-[#FF9500] font-bold border border-[#FF9500]/25';
       tooltipText = 'Отпуск';
     } else if (entry?.arrival && entry?.departure) {
       const arr = new Date(entry.arrival);
@@ -88,31 +88,31 @@ export function CalendarGrid() {
 
       if (delta > 0) {
         colorClass = isDark
-          ? 'bg-[#30D158]/25 text-[#30D158] font-bold backdrop-blur-[3px] border border-[#30D158]/25'
-          : 'bg-[#34C759]/25 text-[#34C759] font-bold backdrop-blur-[3px] border border-[#34C759]/25';
+          ? 'bg-[#30D158]/25 text-[#30D158] font-bold border border-[#30D158]/25'
+          : 'bg-[#34C759]/25 text-[#34C759] font-bold border border-[#34C759]/25';
         tooltipText = `Переработка: +${Math.floor(delta / 60)}ч ${Math.round(delta % 60)}м`;
       } else if (delta < 0) {
         colorClass = isDark
-          ? 'bg-[#FF453A]/25 text-[#FF453A] font-bold backdrop-blur-[3px] border border-[#FF453A]/25'
-          : 'bg-[#FF3B30]/25 text-[#FF3B30] font-bold backdrop-blur-[3px] border border-[#FF3B30]/25';
+          ? 'bg-[#FF453A]/25 text-[#FF453A] font-bold border border-[#FF453A]/25'
+          : 'bg-[#FF3B30]/25 text-[#FF3B30] font-bold border border-[#FF3B30]/25';
         tooltipText = `Недоработка: ${Math.floor(Math.abs(delta) / 60)}ч ${Math.round(Math.abs(delta) % 60)}м`;
       } else {
         colorClass = isDark
-          ? 'bg-white/[0.05] text-[#F2F2F7] backdrop-blur-[3px] border-white/[0.04]'
-          : 'bg-black/[0.03] text-[#1C1C1E] backdrop-blur-[3px] border-black/[0.04]';
+          ? 'bg-white/[0.05] text-[#F2F2F7] border-white/[0.04]'
+          : 'bg-white/[0.22] text-[#1C1C1E] border-white/[0.38]';
         tooltipText = 'Норма выполнена';
       }
     } else if (isHoliday || isWeekend) {
       // Выходной/праздник — красноватая объёмная карточка
       colorClass = isDark
-        ? 'bg-[#FF453A]/[0.1] hover:bg-[#FF453A]/[0.16] text-[#FF453A]/80 border-[#FF453A]/20 shadow-[0_2px_10px_rgba(255,69,58,0.15)]'
-        : 'bg-[#FF3B30]/[0.07] hover:bg-[#FF3B30]/[0.12] text-[#FF3B30]/70 border-[#FF3B30]/20 shadow-[0_2px_10px_rgba(255,59,48,0.12)]';
+        ? 'bg-[#FF453A]/[0.1] hover:bg-[#FF453A]/[0.16] text-[#FF453A]/80 border-[#FF453A]/20 shadow-none'
+        : 'bg-[#FF3B30]/[0.07] hover:bg-[#FF3B30]/[0.12] text-[#FF3B30]/70 border-[#FF3B30]/20 shadow-none';
       tooltipText = isHoliday ? 'Праздник' : 'Выходной';
     } else {
       // Обычный день — белая объёмная карточка, выступающая на фоне панели
       colorClass = isDark
-        ? 'bg-white/[0.08] hover:bg-white/[0.12] text-[#F2F2F7] border-white/[0.06] shadow-[0_2px_10px_rgba(0,0,0,0.25)]'
-        : 'bg-white hover:bg-white/90 text-[#1C1C1E] border-black/[0.04] shadow-[0_2px_10px_rgba(0,0,0,0.06)]';
+        ? 'bg-white/[0.045] hover:bg-white/[0.075] text-[#F2F2F7] border-white/[0.09] shadow-none'
+        : 'bg-white/[0.22] hover:bg-white/[0.30] text-[#1C1C1E] border-white/[0.42]';
     }
 
     if (isToday) {
@@ -133,7 +133,13 @@ export function CalendarGrid() {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-6 px-2">
-        <div className="flex flex-col">
+        <motion.div
+          key={`${year}-${month}`}
+          initial={{ opacity: 0, x: -10, filter: 'blur(4px)' }}
+          animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col"
+        >
           <h3 className={cn("text-xl font-semibold tracking-tight", isDark ? "text-[#F2F2F7]" : "text-[#1C1C1E]")}>
             {MONTHS[month]} {year}
           </h3>
@@ -143,7 +149,7 @@ export function CalendarGrid() {
           )}>
             Итог: {balanceText}
           </span>
-        </div>
+        </motion.div>
         <div className="flex gap-2">
           <motion.button whileTap={{ scale: 0.9 }} onClick={handlePrevMonth} className={navBtn}>
             <ChevronLeft className="w-5 h-5" />
@@ -173,24 +179,32 @@ export function CalendarGrid() {
             const { dateKey, colorClass, tooltipText } = getDayInfo(day);
 
             return (
-              <Popover.Root key={idx}>
+              <Popover.Root key={dateKey}>
                 <Tooltip.Root>
                   <Tooltip.Trigger asChild>
                     <Popover.Trigger asChild>
-                      <button className={cn(
-                        "aspect-square rounded-xl sm:rounded-[14px] flex items-center justify-center text-xs sm:text-sm transition-all duration-300 border text-sm font-medium",
-                        isDark ? "border-white/[0.04]" : "border-black/[0.04]",
-                        colorClass
-                      )}>
+                      <motion.button
+                        layout
+                        initial={{ opacity: 0, scale: 0.9, y: 6 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 0.28, delay: Math.min(idx * 0.012, 0.22), ease: [0.16, 1, 0.3, 1] }}
+                        whileHover={{ y: -3, scale: 1.045 }}
+                        whileTap={{ scale: 0.93 }}
+                        className={cn(
+                          "lg-day aspect-square rounded-xl sm:rounded-[14px] flex items-center justify-center text-xs sm:text-sm border text-sm font-medium",
+                          isDark ? "border-white/[0.06]" : "border-white/[0.42]",
+                          colorClass
+                        )}
+                      >
                         {day}
-                      </button>
+                      </motion.button>
                     </Popover.Trigger>
                   </Tooltip.Trigger>
                   {tooltipText && (
                     <Tooltip.Portal>
                       <Tooltip.Content
                         className={cn(
-                          "px-3 py-1.5 rounded-lg text-sm z-50 backdrop-blur-[6px] border shadow-2xl",
+                          "px-3 py-1.5 rounded-lg text-sm z-50 backdrop-blur-[5px] border shadow-2xl",
                           isDark
                             ? 'bg-[rgba(28,28,30,0.85)] border-white/[0.06] text-[#F2F2F7]'
                             : 'bg-[rgba(255,255,255,0.85)] border-black/[0.06] text-[#1C1C1E]'
@@ -207,7 +221,7 @@ export function CalendarGrid() {
                 <Popover.Portal>
                   <Popover.Content
                     className={cn(
-                      "z-50 w-48 p-2 rounded-2xl shadow-2xl backdrop-blur-[8px] border",
+                      "z-50 w-48 p-2 rounded-2xl shadow-2xl backdrop-blur-[5px] border",
                       isDark
                         ? 'bg-[rgba(28,28,30,0.85)] border-white/[0.06] text-[#F2F2F7]'
                         : 'bg-[rgba(255,255,255,0.85)] border-black/[0.06] text-[#1C1C1E]'

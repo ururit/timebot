@@ -1,7 +1,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* iOS Liquid Glass � Light | �������, �������� ������� ��� � iOS */
+  /* iOS Liquid Glass — Light | Плавные, холодные оттенки как в iOS */
   --font-size: 16px;
   --background: #F5F7FA;
   --foreground: #1C1C1E;
@@ -41,7 +41,7 @@
 }
 
 .dark {
-  /* iOS Liquid Glass � Dark | �������� ���������-����� ���������� */
+  /* iOS Liquid Glass — Dark | Глубокий фиолетово-синий стеклянный */
   --background: #0C0C0E;
   --foreground: #F2F2F7;
   --card: rgba(28, 28, 30, 0.75);
@@ -168,105 +168,329 @@
 
   /* ========== Liquid Glass Utilities ========== */
 
-  /* Главная стеклянная панель с объёмом: блик сверху, фаска, цветная тень */
+  /*
+   * Thick neutral glass, not a coloured lens.
+   * Low blur keeps the background readable; depth comes from bevels + shadows.
+   * There is deliberately no saturation boost, chromatic glow or moving shine.
+   */
   .lg-panel {
-  /* Ҹ���� ���� ��� ���������� ������ */
-    background-color: var(--card);
-    border-color: var(--border);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    background-color: rgba(255, 255, 255, 0.18);
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.075) 0%,
+      rgba(255, 255, 255, 0.018) 28%,
+      rgba(0, 0, 0, 0.018) 72%,
+      rgba(0, 0, 0, 0.045) 100%
+    );
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     box-shadow:
-      0 14px 44px rgba(0, 0, 0, 0.25),
-      0 4px 12px rgba(0, 0, 0, 0.12),
+      0 20px 44px rgba(33, 28, 24, 0.16),
+      0 5px 13px rgba(33, 28, 24, 0.10),
+      inset 0 1px 0 rgba(255, 255, 255, 0.76),
+      inset 0 -1px 0 rgba(41, 34, 29, 0.12),
+      inset 1px 0 0 rgba(255, 255, 255, 0.20),
+      inset -1px 0 0 rgba(50, 42, 36, 0.06);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition:
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 220ms ease,
+      background-color 220ms ease;
   }
 
-  /* Верхняя светящаяся кромка — толщина стекла (приглушена как в тёмной) */
+  /* second inner rim = perceived glass thickness, but stays neutral */
   .lg-panel::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 8%;
-    right: 25%;
-    height: 1.5px;
-    border-radius: 9999px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5) 30%, rgba(255, 255, 255, 0.1) 70%, transparent);
-    opacity: 0.8;
-    z-index: 2;
+    inset: 2px;
+    z-index: 0;
+    border-radius: inherit;
     pointer-events: none;
-  }
-
-  /* Диагональный блик — убран, как в тёмной теме */
-  .lg-panel::after {
-    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.06);
   }
 
   .dark .lg-panel {
-  /* ������� ���������� ������ � �������: ���� ������, �����, ������� ���� */
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.16);
+    background-color: rgba(27, 26, 26, 0.36);
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.055) 0%,
+      rgba(255, 255, 255, 0.012) 30%,
+      rgba(0, 0, 0, 0.045) 72%,
+      rgba(0, 0, 0, 0.12) 100%
+    );
     box-shadow:
-      0 14px 44px rgba(0, 0, 0, 0.45),
-      0 4px 12px rgba(0, 0, 0, 0.25),
-      inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+      0 22px 48px rgba(0, 0, 0, 0.38),
+      0 5px 14px rgba(0, 0, 0, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.21),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.56),
+      inset 1px 0 0 rgba(255, 255, 255, 0.065),
+      inset -1px 0 0 rgba(0, 0, 0, 0.24);
   }
 
   .dark .lg-panel::before {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35) 30%, rgba(255, 255, 255, 0.08) 70%, transparent);
-    opacity: 0.7;
+    border-color: rgba(255, 255, 255, 0.055);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.22);
   }
 
-  .dark .lg-panel::after {
-    display: none;
+  .lg-lift:hover {
+    transform: translate3d(0, -2px, 0) scale(1.003);
+    border-color: rgba(255, 255, 255, 0.50);
+    box-shadow:
+      0 25px 52px rgba(33, 28, 24, 0.19),
+      0 7px 17px rgba(33, 28, 24, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.80),
+      inset 0 -1px 0 rgba(41, 34, 29, 0.14),
+      inset 1px 0 0 rgba(255, 255, 255, 0.22),
+      inset -1px 0 0 rgba(50, 42, 36, 0.07);
   }
 
-  /* Стеклянный чип / маленькая кнопка */
+  .dark .lg-lift:hover {
+    border-color: rgba(255, 255, 255, 0.20);
+    box-shadow:
+      0 27px 58px rgba(0, 0, 0, 0.46),
+      0 8px 20px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.24),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.60),
+      inset 1px 0 0 rgba(255, 255, 255, 0.075),
+      inset -1px 0 0 rgba(0, 0, 0, 0.26);
+  }
+
   .lg-chip {
-    @apply rounded-full backdrop-blur-[4px] backdrop-saturate-[1.2] border transition-all duration-300 active:scale-[0.94];
+    @apply rounded-full border active:scale-[0.94];
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.15);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.01) 55%, rgba(0,0,0,0.04));
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow:
+      0 7px 16px rgba(33, 28, 24, 0.12),
+      inset 0 1px 0 rgba(255,255,255,0.62),
+      inset 0 -1px 0 rgba(41,34,29,0.12);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition: transform 220ms cubic-bezier(0.16,1,0.3,1), background-color 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  }
+
+  .lg-chip:hover {
+    transform: translate3d(0, -1px, 0) scale(1.012);
+    box-shadow:
+      0 10px 22px rgba(33, 28, 24, 0.15),
+      inset 0 1px 0 rgba(255,255,255,0.68),
+      inset 0 -1px 0 rgba(41,34,29,0.13);
   }
 
   .dark .lg-chip {
-    box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.1);
+    background-color: rgba(43, 42, 42, 0.34);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.006) 55%, rgba(0,0,0,0.12));
+    box-shadow:
+      0 8px 18px rgba(0,0,0,0.28),
+      inset 0 1px 0 rgba(255,255,255,0.14),
+      inset 0 -1px 0 rgba(0,0,0,0.40);
+  }
+
+  .lg-button,
+  .lg-button-danger {
+    @apply rounded-2xl border active:scale-[0.97];
+    position: relative;
+    overflow: hidden;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow:
+      0 11px 28px rgba(31, 27, 24, 0.14),
+      inset 0 1px 0 rgba(255,255,255,0.40),
+      inset 0 -1px 0 rgba(0,0,0,0.14);
+    transition: transform 260ms cubic-bezier(0.16,1,0.3,1), background-color 260ms ease, box-shadow 260ms ease;
   }
 
   .lg-button {
-    @apply rounded-2xl backdrop-blur-[4px] backdrop-saturate-[1.2] border transition-all duration-300 active:scale-[0.97];
-    background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+    background-color: color-mix(in srgb, var(--primary) 9%, transparent);
     border-color: color-mix(in srgb, var(--primary) 20%, transparent);
   }
 
   .lg-button:hover {
-    background-color: color-mix(in srgb, var(--primary) 20%, transparent);
-  }
-
-  .lg-button:active {
-    transform: scale(0.97);
+    background-color: color-mix(in srgb, var(--primary) 13%, transparent);
+    transform: translateY(-1px) scale(1.006);
   }
 
   .lg-button-danger {
-    @apply rounded-2xl backdrop-blur-[4px] backdrop-saturate-[1.2] border transition-all duration-300 active:scale-[0.97];
-    background-color: color-mix(in srgb, var(--destructive) 12%, transparent);
+    background-color: color-mix(in srgb, var(--destructive) 9%, transparent);
     border-color: color-mix(in srgb, var(--destructive) 20%, transparent);
     color: var(--destructive);
   }
 
   .lg-button-danger:hover {
-    background-color: color-mix(in srgb, var(--destructive) 20%, transparent);
+    background-color: color-mix(in srgb, var(--destructive) 13%, transparent);
+    transform: translateY(-1px) scale(1.006);
   }
 
-  /* Страховка для браузеров без overscroll-behavior: продлеваем плашку наверх,
-     чтобы при оттягивании страницы не появлялось пустое пространство над ней */
-  .app-nav::before {
-    content: '';
-    position: absolute;
-    top: calc(-1 * env(safe-area-inset-top) - 100px);
-    left: 0;
-    right: 0;
-    height: calc(100px + env(safe-area-inset-top));
-    background: inherit;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .lg-glow {
+  .lg-day {
+    position: relative;
+    overflow: hidden;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018) 56%, rgba(0,0,0,0.020));
+    /* Keep the outer depth, remove the inner sunken shadow. */
     box-shadow:
-      0 0 60px color-mix(in srgb, var(--primary) 8%, transparent),
-      0 0 120px color-mix(in srgb, var(--primary) 4%, transparent);
+      0 9px 20px rgba(33, 28, 24, 0.10);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .dark .lg-day {
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.040), rgba(255,255,255,0.008) 56%, rgba(0,0,0,0.070));
+    box-shadow:
+      0 12px 24px rgba(0,0,0,0.22);
+  }
+
+  /* Sticky navigation: solid-enough neutral surface, NO scroll-fade and NO backdrop blur. */
+  .app-nav {
+    position: sticky;
+    isolation: isolate;
+    background: rgba(246, 244, 241, 0.94) !important;
+    border-bottom: 1px solid rgba(60, 60, 67, 0.08) !important;
+    box-shadow: none;
+  }
+
+  .app-nav::before,
+  .app-nav::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .app-nav--scrolled {
+    box-shadow: 0 8px 20px rgba(36, 31, 27, 0.07);
+  }
+
+  .dark .app-nav {
+    background: rgba(10, 10, 11, 0.93) !important;
+    border-bottom-color: rgba(255,255,255,0.07) !important;
+  }
+
+  .dark .app-nav--scrolled {
+    box-shadow: 0 9px 22px rgba(0,0,0,0.34);
+  }
+
+  .ambient-blob {
+    opacity: 0.96;
+    border-radius: 46% 54% 58% 42% / 44% 47% 53% 56%;
+    animation-name: ambientDrift, ambientBreathe, ambientMorph;
+    animation-timing-function:
+      cubic-bezier(0.45, 0, 0.2, 1),
+      ease-in-out,
+      cubic-bezier(0.45, 0, 0.2, 1);
+    animation-iteration-count: infinite, infinite, infinite;
+    will-change: transform, opacity, border-radius;
+  }
+
+  /* Light theme needs more presence; dark theme stays deliberately restrained. */
+  .ambient-blob--light {
+    opacity: 0.96;
+  }
+
+  .ambient-blob--dark {
+    opacity: 0.60;
+  }
+
+  /* One shared flow keeps the composition coherent. */
+  @keyframes ambientDrift {
+    0%, 100% {
+      transform:
+        translate(-50%, -50%)
+        translate3d(0, 0, 0)
+        rotate(calc(var(--blob-rotate, 0deg) * 0.2))
+        scale(1);
+    }
+    25% {
+      transform:
+        translate(-50%, -50%)
+        translate3d(calc(var(--blob-drift, 44px) * 0.55), calc(var(--blob-drift, 44px) * -0.24), 0)
+        rotate(var(--blob-rotate, 0deg))
+        scale(1.025);
+    }
+    52% {
+      transform:
+        translate(-50%, -50%)
+        translate3d(calc(var(--blob-drift, 44px) * 0.18), calc(var(--blob-drift, 44px) * 0.34), 0)
+        rotate(calc(var(--blob-rotate, 0deg) * -0.55))
+        scale(0.985);
+    }
+    78% {
+      transform:
+        translate(-50%, -50%)
+        translate3d(calc(var(--blob-drift, 44px) * -0.48), calc(var(--blob-drift, 44px) * 0.15), 0)
+        rotate(calc(var(--blob-rotate, 0deg) * 0.55))
+        scale(1.02);
+    }
+  }
+
+  /* Tiny opacity breathing only — no flashing blobs. */
+  @keyframes ambientBreathe {
+    0%, 100% { opacity: 0.88; }
+    50% { opacity: 1; }
+  }
+
+  /* Subtle organic shape change; intentionally much less extreme than v5. */
+  @keyframes ambientMorph {
+    0%, 100% {
+      border-radius: 46% 54% 58% 42% / 44% 47% 53% 56%;
+    }
+    33% {
+      border-radius: 52% 48% 45% 55% / 49% 56% 44% 51%;
+    }
+    66% {
+      border-radius: 43% 57% 52% 48% / 55% 45% 52% 48%;
+    }
+  }
+
+  .glass-float {
+    animation: glassFloat 7s ease-in-out infinite;
+  }
+
+  .glass-pulse {
+    animation: glassPulse 3.8s ease-in-out infinite;
+  }
+
+  @keyframes glassFloat {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -4px, 0); }
+  }
+
+  @keyframes glassPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.90; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lg-panel,
+    .lg-chip,
+    .lg-button,
+    .lg-button-danger,
+    .glass-float,
+    .glass-pulse,
+    .ambient-blob {
+      animation: none !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .lg-lift:hover,
+    .lg-chip:hover,
+    .lg-button:hover,
+    .lg-button-danger:hover {
+      transform: none !important;
+    }
   }
 }
