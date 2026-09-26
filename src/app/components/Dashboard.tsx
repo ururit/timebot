@@ -80,7 +80,7 @@ export function Dashboard() {
   'lg-panel rounded-[20px] transition-all duration-500 backdrop-blur-[32px] backdrop-saturate-[1.8]',
   isDark
     ? 'bg-[rgba(28,28,30,0.20)] border-white/[0.18] shadow-[0_10px_36px_rgba(0,0,0,0.4),0_3px_10px_rgba(0,0,0,0.2)]'
-    : 'bg-[rgba(255,255,255,0.58)] border-white/[0.20] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_-1px_1px_rgba(0,0,0,0.03)]'
+    : 'bg-[rgba(255,255,255,0.58)] border-white/[0.62] shadow-[0_14px_44px_rgba(0,0,0,0.16),0_4px_12px_rgba(0,0,0,0.08),inset_0_0.5px_0_rgba(255,255,255,0.72),inset_0_-1px_1px_rgba(0,0,0,0.03)]'
 );
 
   // Одинаковая «левитация» для обеих кнопок (одна формула тени).
