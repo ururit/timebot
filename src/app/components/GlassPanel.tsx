@@ -9,9 +9,11 @@ export function SpecularHighlight({ isDark }: { isDark: boolean }) {
       <div
         className="absolute top-0 left-[8%] right-[25%] h-[2px] rounded-full"
         style={{
-          background: `linear-gradient(90deg, transparent, ${isDark ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.55)'} 30%, rgba(255,255,255,0.15) 70%, transparent)`,
+          background: isDark
+            ? 'transparent'
+            : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.55) 30%, rgba(255,255,255,0.15) 70%, transparent)',
           filter: 'blur(0.3px)',
-          opacity: isDark ? 1 : 0.85,
+          opacity: 0.85,
         }}
       />
       <div
@@ -25,7 +27,7 @@ export function SpecularHighlight({ isDark }: { isDark: boolean }) {
         className="absolute bottom-0 left-[15%] right-[15%] h-[1px] rounded-full"
         style={{
           background: isDark
-            ? 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.04) 60%, transparent)'
+            ? 'transparent'
             : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.05) 60%, transparent)',
         }}
       />

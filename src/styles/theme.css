@@ -212,8 +212,8 @@
   }
 
   .dark .lg-panel::before {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35) 30%, rgba(255, 255, 255, 0.08) 70%, transparent);
-    opacity: 0.7;
+    background: transparent;
+    opacity: 0;
   }
 
   .dark .lg-panel::after {
